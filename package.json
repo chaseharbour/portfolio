@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "next": "9.5.2",
+    "pts": "^0.9.4",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-pts-canvas": "^0.2.8",
+    "sass": "^1.26.10"
   }
 }
