@@ -11,3 +11,19 @@ $text-white: #dcdada;
 $header-font: "Roboto", sans-serif;
 $subtext-font: "Assistant", sans-serif;
 $paragraph-font: "Numans", sans-serif;
+//Media query mixins
+@mixin media-sm {
+  @media screen and (max-width: 440px) {
+    @content;
+  }
+}
+@mixin media-md {
+  @media screen and (max-width: 800px) {
+    @content;
+  }
+}
+@mixin media-lg {
+  @media screen and (min-width: 1025px) {
+    @content;
+  }
+}

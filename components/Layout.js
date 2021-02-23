@@ -2,6 +2,7 @@ import Header from "./Header";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import CardContainer from "./CardContainer";
+import Technologies from "./Technologies";
 
 const PhysicsCanvas = dynamic(() => import("./PhysicsCanvas"), { ssr: false });
 
@@ -17,6 +18,7 @@ const Layout = (props) => (
 
     <div>{props.children}</div>
 
+    <Technologies></Technologies>
     <CardContainer />
     <PhysicsCanvas
       background="#383F51"
