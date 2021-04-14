@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import CardContainer from "./CardContainer";
 import About from "./About";
 import ContactLinks from "./ContactLinks";
+import Resume from "./Resume";
 
 const PhysicsCanvas = dynamic(() => import("./PhysicsCanvas"), { ssr: false });
 
@@ -20,6 +21,7 @@ const Layout = (props) => (
     <div>{props.children}</div>
 
     <About></About>
+    <Resume />
     <CardContainer />
     <ContactLinks />
     {/* <PhysicsCanvas

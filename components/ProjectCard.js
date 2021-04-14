@@ -7,7 +7,11 @@ const ProjectCard = (props) => {
   return (
     <aside className={card.wrapperSm}>
       {props.imgSrc ? (
-        <img className={card.projectImg} src={props.imgSrc}></img>
+        <img
+          className={card.projectImg}
+          src={props.imgSrc}
+          alt={`${props.title} preview`}
+        ></img>
       ) : (
         <div className={card.imgPh}></div>
       )}
