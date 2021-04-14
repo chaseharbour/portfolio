@@ -3,20 +3,44 @@ import card from "../styles/_card.module.scss";
 import CardTag from "./CardTag";
 
 const ProjectCard = (props) => {
+  const { tech } = props;
   return (
-    <article className={card.wrapperSm}>
+    <aside className={card.wrapperSm}>
       {props.imgSrc ? (
-        <img src={props.imgSrc}></img>
+        <img className={card.projectImg} src={props.imgSrc}></img>
       ) : (
         <div className={card.imgPh}></div>
       )}
       <p className={card.title}>{props.title}</p>
-      <CardTag />
+      <CardTag techTags={tech} />
       <p className={card.desc}>{props.description}</p>
-    </article>
+      {props.links ? (
+        <div className={card.linksContainer}>
+          {props.links.map((link) =>
+            link.type === "repository" ? (
+              <a
+                className={card.link}
+                href={link.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Repo
+              </a>
+            ) : (
+              <a
+                className={card.link}
+                href={link.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Live
+              </a>
+            )
+          )}
+        </div>
+      ) : null}
+    </aside>
   );
 };
 
 export default ProjectCard;
-
-//<p className={card.tech}>{props.tech}</p>

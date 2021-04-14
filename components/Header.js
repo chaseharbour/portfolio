@@ -25,7 +25,7 @@ const Header = () => (
     </svg>
 
     <div className={headerStyles.headerContainer}>
-      <h1 className={headerStyles.headerText}>Designer, Developer, Dumpster</h1>
+      <h1 className={headerStyles.headerText}>Developer Designer Learner</h1>
     </div>
     {/* Make this a button for accessibility */}
     <svg

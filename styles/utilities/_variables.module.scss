@@ -11,6 +11,8 @@ $text-white: #dcdada;
 $header-font: "Roboto", sans-serif;
 $subtext-font: "Assistant", sans-serif;
 $paragraph-font: "Numans", sans-serif;
+//Font sizes
+$header-med: 2.3em;
 //Media query mixins
 @mixin media-sm {
   @media screen and (max-width: 440px) {

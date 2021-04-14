@@ -1,8 +1,9 @@
 @import "utilities/variables.module";
+@import "utilities/mixins.module";
 
 .wrapperSm {
   display: grid;
-  grid-template-rows: 8.5rem min-content 1.6rem 1fr;
+  grid-template-rows: 8.5rem min-content 1.6rem 1fr min-content;
   align-items: center;
 
   background: $card-bg;
@@ -12,6 +13,14 @@
   -webkit-box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @include tablet-screens {
+    grid-template-rows: 12rem min-content 1.6rem 1fr min-content;
+  }
+
+  @include desktop-screens {
+    grid-template-rows: 12rem min-content 1.6rem 1fr min-content;
+  }
 }
 
 .imgPh {
@@ -19,6 +28,13 @@
   width: 100%;
   height: 100%;
   border-radius: 5px;
+}
+
+.projectImg {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  object-fit: cover;
 }
 
 .title {
@@ -34,4 +50,30 @@
   font-family: $paragraph-font;
   line-height: 1.4rem;
   font-size: 1.1em;
+}
+
+.linksContainer {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(2, min-content);
+  grid-gap: 1rem;
+  text-align: center;
+}
+
+.link {
+  align-self: center;
+  text-decoration: none;
+  text-align: center;
+  font-family: $paragraph-font;
+  font-weight: bold;
+  color: $text-secondary;
+  border: 2px solid $text-secondary;
+  border-radius: 4px;
+  padding: 0.8rem 0.7rem;
+
+  &:hover {
+    background-color: $text-secondary;
+    color: $text-white;
+  }
 }

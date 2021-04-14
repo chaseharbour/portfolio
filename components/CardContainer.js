@@ -4,20 +4,47 @@ import container from "../styles/_cardContainer.module.scss";
 
 const CardContainer = () => {
   return (
-    <div className={container.background}>
-      <div className={container.container}>
+    <section className={container.background}>
+      <article className={container.container}>
         <ProjectCard
-          title="Test Project"
-          tech="HTML, Javascript, CSS"
-          description="This is a short description of the project."
+          title="Saveddit"
+          tech={["React", "NodeJS", "Sass"]}
+          description="Web application to view any static image that you have saved to your Reddit account."
+          links={[
+            {
+              type: "live",
+              link: "https://practical-davinci-5eeef8.netlify.app/",
+            },
+            {
+              type: "repository",
+              link: "https://github.com",
+            },
+          ]}
         />
         <ProjectCard
-          title="This is a longer title"
-          tech="Next js, Sass"
-          description="This is a test for a slightly longer description of the project."
+          title="Socket.io Trivia"
+          tech={["React", "NodeJS", "Tailwind"]}
+          description="Room-based triva and chat app. Compete and chat with friends in this multiplayer trivia game."
+          links={[
+            {
+              type: "repository",
+              link: "https://github.com",
+            },
+          ]}
         />
-      </div>
-    </div>
+        <ProjectCard
+          title="Portfolio Website"
+          tech={["NextJS", "Sass"]}
+          description="Website to display brief information about who I am as a developer and a person."
+          links={[
+            {
+              type: "repository",
+              link: "https://github.com",
+            },
+          ]}
+        />
+      </article>
+    </section>
   );
 };
 

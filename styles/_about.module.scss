@@ -1,0 +1,52 @@
+@import "utilities/variables.module";
+@import "utilities/mixins.module";
+
+.container {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  margin: 0;
+  padding: 2rem 0;
+  padding-bottom: 4rem;
+  background-color: #3d4045;
+  overflow: hidden;
+
+  @include tablet-screens {
+    grid-template-columns: minmax(5rem, 70%);
+  }
+
+  @include desktop-screens {
+    grid-template-columns: minmax(2rem, 40%);
+  }
+}
+
+.aboutHeader {
+  padding: 1rem;
+  margin: 0 2rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  color: $text-white;
+  font-family: $header-font;
+
+  @include tablet-screens {
+    font-size: 2.5em;
+  }
+}
+
+.aboutBodyPrimary,
+.aboutBodySecondary,
+.aboutBodyTertiary {
+  padding: 1rem;
+  margin: 1rem;
+  color: $text-white;
+  font-family: $paragraph-font;
+  border: 1px solid $text-white;
+  border-radius: 5px;
+
+  @include tablet-screens {
+    font-size: 1.3em;
+    line-height: 1.4em;
+    padding: 1.5rem;
+  }
+}
