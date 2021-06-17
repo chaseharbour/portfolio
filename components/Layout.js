@@ -5,6 +5,7 @@ import CardContainer from "./CardContainer";
 import About from "./About";
 import ContactLinks from "./ContactLinks";
 import Resume from "./Resume";
+import ProjectContainer from "./ProjectContainer";
 
 const PhysicsCanvas = dynamic(() => import("./PhysicsCanvas"), { ssr: false });
 
@@ -15,14 +16,11 @@ const Layout = (props) => (
     <Head>
       <title>Chase Harbour</title>
     </Head>
-
     <Header></Header>
-
     <div>{props.children}</div>
-
+    <ProjectContainer />
     <About></About>
     <Resume />
-    <CardContainer />
     <ContactLinks />
     {/* <PhysicsCanvas
       background="#383F51"
