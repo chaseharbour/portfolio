@@ -14,14 +14,14 @@ const ProjectContainer = () => {
     {
       id: 1,
       active: false,
-      title: "Socket.io Trivia",
+      title: "Trivia",
       description:
         "Room-based trivia and chat app. Compete and chat with friends in this multiplayer trivia game.",
     },
     {
       id: 2,
       active: false,
-      title: "Portfolio Website",
+      title: "Portfolio",
       description:
         "Website to display brief information about who I am as a developer and a person.",
     },
@@ -65,8 +65,11 @@ const ProjectContainer = () => {
     if (isActive) {
       //If there is a project that has been clicked on, this markup will be applied.
       return (
-        <section className={projectContainer.active}>
-          <article>
+        <>
+          <h1>Work</h1>
+          <section
+            className={`${projectContainer.active} ${projectContainer.container}`}
+          >
             {data.map((proj) => {
               if (proj.active) {
                 return (
@@ -79,35 +82,43 @@ const ProjectContainer = () => {
                 );
               }
             })}
-          </article>
-          <aside>
-            {data.map((proj, i) => {
-              if (!proj.active) {
-                return (
-                  <Project
-                    isActive={proj.active}
-                    onClick={handleProjectClicked}
-                    theData={proj}
-                    key={proj.id}
-                  />
-                );
-              }
-            })}
-          </aside>
-        </section>
+
+            <aside
+              className={`${projectContainer.aside} ${projectContainer.container}`}
+            >
+              {data.map((proj, i) => {
+                if (!proj.active) {
+                  return (
+                    <Project
+                      isActive={proj.active}
+                      onClick={handleProjectClicked}
+                      theData={proj}
+                      key={proj.id}
+                    />
+                  );
+                }
+              })}
+            </aside>
+          </section>
+        </>
       );
     } else {
       return (
-        <section className={projectContainer.inactive}>
-          {data.map((proj, i) => (
-            <Project
-              isActive={proj.active}
-              onClick={handleProjectClicked}
-              theData={proj}
-              key={proj.id}
-            />
-          ))}
-        </section>
+        <>
+          <h1>Work</h1>
+          <section
+            className={`${projectContainer.inactive} ${projectContainer.container}`}
+          >
+            {data.map((proj, i) => (
+              <Project
+                isActive={proj.active}
+                onClick={handleProjectClicked}
+                theData={proj}
+                key={proj.id}
+              />
+            ))}
+          </section>
+        </>
       );
     }
   }

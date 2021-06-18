@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import project from "../styles/_project.module.scss";
+import projectStyles from "../styles/_project.module.scss";
 
 const Project = ({ theData, onClick, key }) => {
-  const handleDescClassName = (active) => {
+  const handleClassName = (active) => {
     if (active) {
-      return project.active;
+      return projectStyles.active;
     } else {
-      return project.inactive;
+      return projectStyles.inactive;
     }
   };
 
@@ -20,13 +20,11 @@ const Project = ({ theData, onClick, key }) => {
 
   return (
     <article
-      className={handleContainerClassName(theData.active)}
+      className={handleClassName(theData.active)}
       onClick={() => onClick(theData.id)}
     >
-      <h1 className="project-title">{theData.title}</h1>
-      <p className={handleDescClassName(theData.active)}>
-        {theData.description}
-      </p>
+      <h1 className={projectStyles.title}>{theData.title}</h1>
+      <p>{theData.description}</p>
     </article>
   );
 };
