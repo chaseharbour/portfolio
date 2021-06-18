@@ -14,23 +14,16 @@ const ProjectContainer = () => {
     {
       id: 1,
       active: false,
-      title: "My Project 2",
+      title: "Socket.io Trivia",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus laoreet non curabitur gravida arcu ac tortor dignissim. Mus mauris vitae ultricies leo integer malesuada nunc. Convallis convallis tellus id interdum velit laoreet id.",
+        "Room-based trivia and chat app. Compete and chat with friends in this multiplayer trivia game.",
     },
     {
       id: 2,
       active: false,
-      title: "My Project 3",
+      title: "Portfolio Website",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus laoreet non curabitur gravida arcu ac tortor dignissim. Mus mauris vitae ultricies leo integer malesuada nunc. Convallis convallis tellus id interdum velit laoreet id.",
-    },
-    {
-      id: 3,
-      active: false,
-      title: "My Project 4",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lacus laoreet non curabitur gravida arcu ac tortor dignissim. Mus mauris vitae ultricies leo integer malesuada nunc. Convallis convallis tellus id interdum velit laoreet id.",
+        "Website to display brief information about who I am as a developer and a person.",
     },
   ]);
 
@@ -60,22 +53,17 @@ const ProjectContainer = () => {
         return;
       }
     });
+
+    //Activates only the project that matches the id of the one clicked.
     const project = projectsCopy.find((proj) => proj.id === id);
     project.active = !project.active;
     setData(projectsCopy);
   };
 
-  const handleGetClassName = (active) => {
-    if (active) {
-      return "container-active";
-    } else {
-      return "container";
-    }
-  };
-
-  /* When a Project component is clicked on, it becomes active. It will be placed in a previously empty container place to the left, the headers for the other projects will be positioned to the right and will become a single column. */
+  /* When a Project component is clicked on, it becomes active. It will be placed in a separate grid comlumn to the left, the headers for the other projects will be positioned to the right and will become a single column. */
   {
     if (isActive) {
+      //If there is a project that has been clicked on, this markup will be applied.
       return (
         <section className={projectContainer.active}>
           <article>

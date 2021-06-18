@@ -2,7 +2,7 @@
 
 .inactive {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(5rem, 20%));
+  grid-template-columns: repeat(auto-fill, minmax(4rem, 25%));
   grid-gap: 1rem;
   justify-content: center;
 }
