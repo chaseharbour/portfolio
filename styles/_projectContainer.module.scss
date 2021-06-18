@@ -1,0 +1,13 @@
+@import "utilities/variables.module";
+
+.inactive {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 20%));
+  grid-gap: 1rem;
+  justify-content: center;
+}
+
+.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

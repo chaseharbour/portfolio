@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
+import projectContainer from "../styles/_projectContainer.module.scss";
 
 const ProjectContainer = () => {
   const [data, setData] = useState([
@@ -76,7 +77,7 @@ const ProjectContainer = () => {
   {
     if (isActive) {
       return (
-        <section className="container-active">
+        <section className={projectContainer.active}>
           <article>
             {data.map((proj) => {
               if (proj.active) {
@@ -109,7 +110,7 @@ const ProjectContainer = () => {
       );
     } else {
       return (
-        <section className="container">
+        <section className={projectContainer.inactive}>
           {data.map((proj, i) => (
             <Project
               isActive={proj.active}

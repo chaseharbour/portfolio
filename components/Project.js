@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
+import project from "../styles/_project.module.scss";
 
 const Project = ({ theData, onClick, key }) => {
   const handleDescClassName = (active) => {
     if (active) {
-      return "project-desc active-desc";
+      return project.active;
     } else {
-      return "project-desc";
+      return project.inactive;
     }
   };
 

@@ -1,1 +1,9 @@
 @import "utilities/variables.module";
+
+.inactive {
+  display: none;
+}
+
+.active {
+  display: block;
+}
