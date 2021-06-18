@@ -14,7 +14,7 @@ const ProjectContainer = () => {
     {
       id: 1,
       active: false,
-      title: "Trivia",
+      title: "Trivia app",
       description:
         "Room-based trivia and chat app. Compete and chat with friends in this multiplayer trivia game.",
     },
