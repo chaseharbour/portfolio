@@ -2,23 +2,53 @@
 
 .container {
   position: relative;
-  background: #292929;
+  background: $bg-primary;
   z-index: 1;
+}
+
+.title {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 1.625rem;
+  background: $bg-primary;
+  color: white;
+  font-size: 3em;
+  font-family: inherit;
+  letter-spacing: -0.06rem;
+  text-transform: uppercase;
 }
 
 .inactive {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: min-content;
   grid-gap: 0.5rem;
   justify-items: center;
   height: 75vh;
-  padding: 0 1rem 0 1rem;
+  padding: 0 1rem 1rem 1rem;
+
+  .imgContainer {
+    background-color: $img-bg;
+    height: 100%;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 4;
+  }
 }
 
 .active {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content;
   justify-items: center;
   height: 75vh;
-  padding: 0 1.625rem 0 1.625rem;
+  padding: 0 1rem 1rem 1rem;
+
+  .imgContainer {
+    background-color: $img-bg;
+    height: 100%;
+    width: 100%;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

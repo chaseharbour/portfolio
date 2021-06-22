@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&family=Numans&family=Roboto&display=swap");
 
+//Document colors
+$bg-primary: #292929;
+$contrast-blue: #2f8dda;
+$contrast-red: #ff4960;
+$contrast-yellow: #e1bc29;
 // Card colors
 $card-bg: #dcdada;
 $img-bg: #bcbcbc;
@@ -13,6 +18,8 @@ $subtext-font: "Assistant", sans-serif;
 $paragraph-font: "Numans", sans-serif;
 //Font sizes
 $header-med: 2.3em;
+//Font spacings
+$header-spacing: -0.06rem;
 //Media query mixins
 @mixin media-sm {
   @media screen and (max-width: 440px) {

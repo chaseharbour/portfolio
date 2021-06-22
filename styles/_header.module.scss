@@ -3,69 +3,49 @@
 
 .container {
   display: grid;
-  grid-template-columns: minmax(10rem, 15rem);
-  grid-template-rows: 2fr 3.5fr 1fr;
-  justify-content: center;
-  background: linear-gradient(180deg, #2c313a 60.94%, #3d4045 100%);
+  grid-template-rows: min-content auto min-content;
+  background: $bg-primary;
   height: 100vh;
-}
+  width: 100%;
 
-.logoSvg {
-  align-self: end;
-  justify-self: center;
-
-  @include tablet-screens {
-    font-size: $header-med;
+  h1 {
+    font-weight: 900;
   }
 }
 
-.headerContainer {
-  justify-self: center;
-  align-self: start;
-  margin-top: 2rem;
-}
-
-.headerText {
-  text-align: center;
-  font-family: $header-font;
+.firstname {
+  padding: 0;
+  margin: 0;
   color: $text-white;
-  width: 10rem;
-  height: 8rem;
-  letter-spacing: 0.025em;
-
-  @include tablet-screens {
-    text-align: left;
-    font-size: $header-med;
-  }
-
-  @include desktop-screens {
-    text-align: left;
-    font-size: $header-med;
-  }
+  text-transform: uppercase;
+  font-size: 3.5rem;
+  letter-spacing: $header-spacing;
 }
 
-@keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.imgContainer {
+  display: grid;
+  grid-template-rows: 65% 35%;
+  grid-row-gap: 0.2rem;
 }
 
-.arrowSvg {
-  align-self: center;
-  justify-self: center;
-  animation: floating 4s ease-in-out infinite;
+.imgLeft {
+  height: 100%;
+  width: auto;
+  background-color: $img-bg;
+}
+.imgRight {
+  height: 100%;
+  width: 174px;
+  background-color: $img-bg;
+  justify-self: left;
+}
 
-  &:hover {
-    background: #fff;
-    border-radius: 50%;
-    height: 1rem;
-    width: 1rem;
-  }
+.lastname {
+  padding: 0;
+  margin: 0;
+  color: $text-white;
+  text-transform: uppercase;
+  font-size: 4rem;
+  letter-spacing: $header-spacing;
+  justify-self: right;
 }

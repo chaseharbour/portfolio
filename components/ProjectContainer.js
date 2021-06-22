@@ -66,7 +66,7 @@ const ProjectContainer = () => {
       //If there is a project that has been clicked on, this markup will be applied.
       return (
         <>
-          <h1>Work</h1>
+          <h1 className={projectContainer.title}>Work</h1>
           <section
             className={`${projectContainer.active} ${projectContainer.container}`}
           >
@@ -99,13 +99,14 @@ const ProjectContainer = () => {
                 }
               })}
             </aside>
+            <div className={projectContainer.imgContainer}></div>
           </section>
         </>
       );
     } else {
       return (
         <>
-          <h1>Work</h1>
+          <h1 className={projectContainer.title}>Work</h1>
           <section
             className={`${projectContainer.inactive} ${projectContainer.container}`}
           >
@@ -117,6 +118,7 @@ const ProjectContainer = () => {
                 key={proj.id}
               />
             ))}
+            <div className={projectContainer.imgContainer}></div>
           </section>
         </>
       );
