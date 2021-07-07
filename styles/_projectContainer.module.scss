@@ -25,7 +25,9 @@
   grid-gap: 0.5rem;
   justify-items: center;
   height: 75vh;
+  max-width: 25rem;
   padding: 0 1rem 1rem 1rem;
+  margin: 0 auto;
 
   .imgContainer {
     background-color: $img-bg;
@@ -42,7 +44,9 @@
   grid-template-rows: min-content;
   justify-items: center;
   height: 75vh;
+  max-width: 35rem;
   padding: 0 1rem 1rem 1rem;
+  margin: 0 auto;
 
   .imgContainer {
     background-color: $img-bg;

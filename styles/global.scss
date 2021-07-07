@@ -1,7 +1,10 @@
+@import "utilities/variables.module";
+
 html,
 body {
   font-family: roboto;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  background-color: $bg-primary;
 }

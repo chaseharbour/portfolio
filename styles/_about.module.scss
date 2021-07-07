@@ -3,13 +3,14 @@
 
 .container {
   display: grid;
-  justify-content: center;
-  justify-items: center;
+  justify-content: left;
+  justify-items: left;
   align-content: center;
-  margin: 0;
-  padding: 2rem 0;
+  max-width: 30rem;
+  margin: 0 auto;
+  padding: 0;
   padding-bottom: 4rem;
-  background-color: #3d4045;
+  background-color: $bg-primary;
   overflow: hidden;
 
   @include tablet-screens {
@@ -21,13 +22,77 @@
   }
 }
 
+.title {
+  padding: 0;
+  margin: 0;
+  padding-bottom: 1.625rem;
+  background: $bg-primary;
+  color: white;
+  font-size: 3em;
+  font-family: inherit;
+  letter-spacing: -0.06rem;
+  text-transform: uppercase;
+}
+
 .aboutHeader {
+  position: relative;
   padding: 1rem;
-  margin: 0 2rem;
+  margin: 0;
   margin-top: 0.5rem;
-  text-align: center;
-  color: $text-white;
+  text-align: left;
   font-family: $header-font;
+  text-transform: uppercase;
+  z-index: 2;
+
+  &:nth-of-type(1) {
+    color: $contrast-blue;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $contrast-blue;
+      height: 6px;
+      width: 94%;
+      top: 36px;
+      left: 4%;
+      z-index: -1;
+    }
+  }
+  &:nth-of-type(2) {
+    color: $contrast-red;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $contrast-red;
+      height: 6px;
+      width: 94%;
+      top: 36px;
+      left: 4%;
+      z-index: -1;
+    }
+  }
+  &:nth-of-type(3) {
+    color: $contrast-yellow;
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $contrast-yellow;
+      height: 6px;
+      width: 94%;
+      top: 36px;
+      left: 4%;
+      z-index: -1;
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 9px;
+    width: 100%;
+    top: 32px;
+    left: -3%;
+    z-index: -1;
+  }
 
   @include tablet-screens {
     font-size: 2.5em;
@@ -37,12 +102,26 @@
 .aboutBodyPrimary,
 .aboutBodySecondary,
 .aboutBodyTertiary {
+  position: relative;
   padding: 1rem;
   margin: 1rem;
   color: $text-white;
   font-family: $paragraph-font;
-  border: 1px solid $text-white;
-  border-radius: 5px;
+  line-height: 1.4rem;
+  font-size: 0.94rem;
+  font-weight: regular;
+  z-index: 1;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -1rem;
+    left: -1%;
+    background-color: $bg-secondary;
+    width: calc(100% - 5rem);
+    height: 95%;
+    z-index: -1;
+  }
 
   @include tablet-screens {
     font-size: 1.3em;
