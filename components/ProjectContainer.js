@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import Project from "./Project";
 import projectContainer from "../styles/_projectContainer.module.scss";
 
+import { motion, AnimateSharedLayout } from "framer-motion";
+
 const ProjectContainer = () => {
   const [data, setData] = useState([
     {
@@ -28,6 +30,12 @@ const ProjectContainer = () => {
   ]);
 
   const [isActive, setIsActive] = useState(false);
+
+  //Framer motion animation states
+  const variants = {
+    shown: { x: 0 },
+    hidden: { x: "-100%" },
+  };
 
   useEffect(() => {
     const projectsCopy = [...data];
@@ -65,9 +73,10 @@ const ProjectContainer = () => {
     if (isActive) {
       //If there is a project that has been clicked on, this markup will be applied.
       return (
-        <>
+        <AnimateSharedLayout>
           <h1 className={projectContainer.title}>Work</h1>
-          <section
+          <motion.section
+            initial={false}
             className={`${projectContainer.active} ${projectContainer.container}`}
           >
             {data.map((proj) => {
@@ -100,12 +109,12 @@ const ProjectContainer = () => {
               })}
             </aside>
             <div className={projectContainer.imgContainer}></div>
-          </section>
-        </>
+          </motion.section>
+        </AnimateSharedLayout>
       );
     } else {
       return (
-        <>
+        <AnimateSharedLayout>
           <h1 className={projectContainer.title}>Work</h1>
           <section
             className={`${projectContainer.inactive} ${projectContainer.container}`}
@@ -120,7 +129,7 @@ const ProjectContainer = () => {
             ))}
             <div className={projectContainer.imgContainer}></div>
           </section>
-        </>
+        </AnimateSharedLayout>
       );
     }
   }
