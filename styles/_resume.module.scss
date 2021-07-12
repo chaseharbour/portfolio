@@ -3,15 +3,10 @@
 
 .container {
   display: grid;
-  justify-content: left;
   justify-items: left;
-  align-content: center;
-  max-width: 25rem;
   margin: 0 auto;
-  padding: 2rem 0;
-  padding-bottom: 4rem;
+  max-width: 30rem;
   background-color: $bg-primary;
-  overflow: hidden;
 
   @include tablet-screens {
     grid-template-columns: minmax(5rem, 70%);
@@ -45,22 +40,19 @@
 }
 
 .body {
-  margin-bottom: 2rem;
+  text-align: start;
   color: $text-white;
   font-family: $paragraph-font;
   line-height: 1.6rem;
   font-size: 0.94rem;
-  font-weight: regular;
 
   @include tablet-screens {
     font-size: 1.2em;
     line-height: 1.4em;
-    padding: 1.5rem;
   }
 }
 
 .link {
-  align-self: center;
   text-decoration: none;
   text-align: center;
   font-family: $paragraph-font;
@@ -69,8 +61,6 @@
   border: 2px solid $text-white;
   border-radius: 4px;
   padding: 0.6rem 0.5rem;
-  margin-bottom: 1rem;
-  margin-top: 1.5rem;
 
   &:hover {
     background-color: $text-white;

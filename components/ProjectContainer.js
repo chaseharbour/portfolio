@@ -123,7 +123,7 @@ const ProjectContainer = () => {
           >
             {data.map((proj, i) => (
               <MotionProject
-                animate={{ scale: 0.9 }}
+                animate={{ scale: 0.95 }}
                 isActive={proj.active}
                 onClick={handleProjectClicked}
                 theData={proj}

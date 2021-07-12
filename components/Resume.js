@@ -1,15 +1,16 @@
 import React from "react";
 import resumeStyles from "../styles/_resume.module.scss";
 
+import { motion } from "framer-motion";
+
 const Resume = () => {
   return (
     <>
-      <h1 className={resumeStyles.title}>Contact</h1>
+      <h1 className={resumeStyles.title}>Experience</h1>
       <article className={resumeStyles.container}>
-        <h2 className={resumeStyles.header}>Cv</h2>
         <p className={resumeStyles.body}>
-          My CV is located at the link below. If you'd like to reach me, email
-          is always a great option: harbourcp@gmail.com
+          My experience and work history is located at the link below. If you'd
+          like to reach me, email is always a great option: harbourcp@gmail.com
         </p>
         <a
           className={resumeStyles.link}
