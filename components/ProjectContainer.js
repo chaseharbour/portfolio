@@ -4,6 +4,8 @@ import projectContainer from "../styles/_projectContainer.module.scss";
 
 import { motion, AnimateSharedLayout } from "framer-motion";
 
+const MotionProject = motion(Project, { forwardMotionProps: true });
+
 const ProjectContainer = () => {
   const [data, setData] = useState([
     {
@@ -73,16 +75,16 @@ const ProjectContainer = () => {
     if (isActive) {
       //If there is a project that has been clicked on, this markup will be applied.
       return (
-        <AnimateSharedLayout>
+        <>
           <h1 className={projectContainer.title}>Work</h1>
-          <motion.section
-            initial={false}
+          <section
             className={`${projectContainer.active} ${projectContainer.container}`}
           >
             {data.map((proj) => {
               if (proj.active) {
                 return (
-                  <Project
+                  <MotionProject
+                    animate={{ x: 10, scale: 1 }}
                     isActive={proj.active}
                     onClick={handleProjectClicked}
                     theData={proj}
@@ -98,7 +100,7 @@ const ProjectContainer = () => {
               {data.map((proj, i) => {
                 if (!proj.active) {
                   return (
-                    <Project
+                    <MotionProject
                       isActive={proj.active}
                       onClick={handleProjectClicked}
                       theData={proj}
@@ -109,18 +111,19 @@ const ProjectContainer = () => {
               })}
             </aside>
             <div className={projectContainer.imgContainer}></div>
-          </motion.section>
-        </AnimateSharedLayout>
+          </section>
+        </>
       );
     } else {
       return (
-        <AnimateSharedLayout>
+        <>
           <h1 className={projectContainer.title}>Work</h1>
           <section
             className={`${projectContainer.inactive} ${projectContainer.container}`}
           >
             {data.map((proj, i) => (
-              <Project
+              <MotionProject
+                animate={{ scale: 0.9 }}
                 isActive={proj.active}
                 onClick={handleProjectClicked}
                 theData={proj}
@@ -129,7 +132,7 @@ const ProjectContainer = () => {
             ))}
             <div className={projectContainer.imgContainer}></div>
           </section>
-        </AnimateSharedLayout>
+        </>
       );
     }
   }
