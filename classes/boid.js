@@ -4,7 +4,8 @@ export default class Boid {
     this.y = y;
     this.r = r;
     this.speed = speed;
-    this.velocity = this.x + speed;
+    this.Xvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
+    this.Yvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
   }
 
   draw(ctx, frameCount) {
@@ -19,6 +20,16 @@ export default class Boid {
     if (this.x >= ctx.canvas.width) {
       this.x = 0;
     }
-    this.x += this.speed;
+    if (this.y >= ctx.canvas.height) {
+      this.y = 0;
+    }
+    if (this.x < 0) {
+      this.x = ctx.canvas.width;
+    }
+    if (this.y < 0) {
+      this.y = ctx.canvas.height;
+    }
+    this.x += this.Xvelocity;
+    this.y += this.Yvelocity;
   }
 }

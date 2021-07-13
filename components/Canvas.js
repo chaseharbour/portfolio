@@ -13,13 +13,14 @@ const Canvas = (props) => {
     for (let i = 0; i < 10; i++) {
       randX = Math.random() * 300;
       randY = Math.random() * 150;
-      boids.push(new Boid(randX, randY, 11, Math.random() * 3 + 2));
+      boids.push(new Boid(randX, randY, 8, Math.random() * 2 + 5));
     }
   }, [boids]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+
     let animationFrameId;
     let frameCount = 0;
 
