@@ -28,11 +28,12 @@ const Canvas = (props) => {
       frameCount++;
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       boids.map((boid, i) => {
-        boid.draw(context, frameCount);
+        boid.draw(context);
         boid.move(context);
-        boid.separation(boids, context);
       });
       boids[1].perceptionField(context);
+      boids[1].separation(boids, context);
+
       animationFrameId = window.requestAnimationFrame(render);
     };
 

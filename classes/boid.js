@@ -43,16 +43,17 @@ export default class Boid {
 
   separation(boids, ctx) {
     const separationFactor = 30;
-    boids.map((boid, i) => {
-      let dx = this.x - boid.x;
-      let dy = this.y - boid.y;
+    boids.forEach((boid, i) => {
+      //Check how close other boids are, color boid red if within separationFactor
+      let dx = boid.x - this.x;
+      let dy = boid.y - this.y;
+      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
 
-      if (
-        (dx > 0 && dx < separationFactor) ||
-        (dy > 0 && dy < separationFactor)
-      ) {
-        boid.draw(ctx, "#ff6d29");
+      if (hitDetection < this.perception && hitDetection !== 0) {
+        return boid.draw(ctx, "red");
       }
+
+      return boid.draw(ctx, "#fff");
     });
   }
 }
