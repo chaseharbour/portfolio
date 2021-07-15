@@ -1,6 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import Boid from "../classes/boid";
 
+import canvasStyles from "../styles/_canvas.module.scss";
+
 const Canvas = (props) => {
   const canvasRef = useRef(null);
 
@@ -10,10 +12,10 @@ const Canvas = (props) => {
   let randY;
 
   useEffect(() => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
       randX = Math.random() * 300;
       randY = Math.random() * 150;
-      boids.push(new Boid(randX, randY, 6, Math.random() * 2));
+      boids.push(new Boid(randX, randY, 6, 2));
     }
   }, [boids]);
 
@@ -29,12 +31,13 @@ const Canvas = (props) => {
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       boids.map((boid, i) => {
         boid.draw(context);
-        boid.move(context);
+        boid.edgeDetect(context);
         boid.heading();
-        boid.separation(boids, context);
+        //boid.separation(boids, context);
+        boid.align(boids);
+        boid.move();
       });
       boids[1].perceptionField(context);
-      //boids[1].separation(boids, context);
 
       animationFrameId = window.requestAnimationFrame(render);
     };
@@ -46,7 +49,7 @@ const Canvas = (props) => {
     };
   }, [boids]);
 
-  return <canvas ref={canvasRef} {...props} />;
+  return <canvas className={canvasStyles.canvas} ref={canvasRef} {...props} />;
 };
 
 export default Canvas;

@@ -6,10 +6,10 @@ export default class Boid {
     this.y = y;
     this.r = r;
     this.speed = speed;
-    this.Xvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
-    this.Yvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
+    this.velocity = this.speed * (Math.random() > 0.5 ? 1 : -1);
     this.head = 0;
-    this.perception = 20;
+    this.maxForce = 80;
+    this.perception = 70;
   }
 
   draw(ctx, color = "#fff") {
@@ -20,7 +20,13 @@ export default class Boid {
     ctx.fill();
   }
 
-  move(ctx) {
+  move() {
+    this.x += this.velocity;
+    this.y += this.velocity;
+    //console.log(this.Xvelocity);
+  }
+
+  edgeDetect(ctx) {
     if (this.x >= ctx.canvas.width) {
       this.x = 0;
     }
@@ -33,9 +39,6 @@ export default class Boid {
     if (this.y < 0) {
       this.y = ctx.canvas.height;
     }
-    this.x += this.Xvelocity;
-    this.y += this.Yvelocity;
-    //console.log(this.Xvelocity);
   }
 
   perceptionField(ctx) {
@@ -70,7 +73,7 @@ export default class Boid {
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
       const headingWeight = this.perception;
 
-      if (hitDetection < this.perception && hitDetection !== 0) {
+      if (boid != this && hitDetection < this.perception) {
         //Calculate dot product
         const dotProduct = this.x * boid.x + this.y * boid.y;
         //Calculate angle between the two boids
@@ -82,7 +85,7 @@ export default class Boid {
         let newHeading = this.head + headingWeight * (boid.head - this.head);
 
         if (dotProduct > 0) {
-          return this.steering(newHeading);
+          return boid.steering(newHeading);
         }
 
         return;
@@ -92,6 +95,31 @@ export default class Boid {
       }
       return;
       //return boid.draw(ctx, "#fff");
+    });
+  }
+
+  align(boids) {
+    const avgHeading = boids.reduce(
+      (prev, curr, i) => {
+        return { vel: (prev.velocity + curr.velocity) / (i + 1) };
+      },
+      { vel: 0 }
+    );
+
+    //Makes boids poof??
+    boids.map((boid, i) => {
+      let dx = boid.x - this.x;
+      let dy = boid.y - this.y;
+      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
+
+      if (boid != this && hitDetection < this.perception) {
+        if (this.velocity + avgHeading <= this.maxForce) {
+          return (boid.velocity = avgHeading.vel);
+        }
+        //return (this.velocity = avgHeading.vel);
+      }
+
+      return;
     });
   }
 }
