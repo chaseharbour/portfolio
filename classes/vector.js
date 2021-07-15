@@ -3,8 +3,6 @@ import { toDegrees, toRadians } from "../helpers/conversions";
 export default class Vector {
   constructor(...components) {
     this.components = components;
-    this.x = this.components[0];
-    this.y = this.components[1];
   }
 
   add({ components }) {

@@ -1,14 +1,18 @@
 import { toDegrees, toRadians } from "../helpers/conversions";
+import Vector from "./vector";
 
 export default class Boid {
   constructor(x, y, r, speed) {
-    this.x = x;
-    this.y = y;
+    this.position = new Vector(x, y);
+    this.x = this.position.components[0];
+    this.y = this.position.components[1];
     this.r = r;
     this.speed = speed;
-    this.velocity = this.speed * (Math.random() > 0.5 ? 1 : -1);
+    this.velocity = new Vector(1, 1).random2D(2, 5);
+    this.acceleration = new Vector();
     this.head = 0;
-    this.maxForce = 80;
+    this.maxForce = 2;
+    this.maxSpeed = 1;
     this.perception = 70;
   }
 
@@ -16,35 +20,51 @@ export default class Boid {
     //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+    ctx.arc(
+      this.position.components[0],
+      this.position.components[1],
+      this.r,
+      0,
+      2 * Math.PI
+    );
     ctx.fill();
   }
 
   move() {
-    this.x += this.velocity;
-    this.y += this.velocity;
-    //console.log(this.Xvelocity);
+    let newPos = this.position.add(this.velocity);
+    let velLimit = this.velocity.limit(this.maxSpeed);
+    let newVel = this.velocity.add(this.acceleration);
+
+    this.position = newPos;
+    this.velocity = newVel;
+    this.velocity = velLimit;
   }
 
   edgeDetect(ctx) {
-    if (this.x >= ctx.canvas.width) {
-      this.x = 0;
+    if (this.position.components[0] >= ctx.canvas.width) {
+      this.position.components[0] = 0;
     }
-    if (this.y >= ctx.canvas.height) {
-      this.y = 0;
+    if (this.position.components[1] >= ctx.canvas.height) {
+      this.position.components[1] = 0;
     }
-    if (this.x < 0) {
-      this.x = ctx.canvas.width;
+    if (this.position.components[0] < 0) {
+      this.position.components[0] = ctx.canvas.width;
     }
-    if (this.y < 0) {
-      this.y = ctx.canvas.height;
+    if (this.position.components[1] < 0) {
+      this.position.components[1] = ctx.canvas.height;
     }
   }
 
   perceptionField(ctx) {
     ctx.fillStyle = "rgba(219, 219, 219, 0.5)";
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.perception, 0, 2 * Math.PI);
+    ctx.arc(
+      this.position.components[0],
+      this.position.components[1],
+      this.perception,
+      0,
+      2 * Math.PI
+    );
     ctx.fill();
   }
 
