@@ -19,6 +19,18 @@ export default class Vector {
     );
   }
 
+  multiply({ components }) {
+    return new Vector(
+      ...components.map((component, i) => this.components[i] * component)
+    );
+  }
+
+  divide({ components }) {
+    return new Vector(
+      ...components.map((component, i) => this.components[i] / component)
+    );
+  }
+
   scaleBy(num) {
     return new Vector(...this.components.map((component) => component * num));
   }
@@ -53,6 +65,11 @@ export default class Vector {
   }
 
   random2D(min, max) {
-    return;
+    const randPosNegX = Math.random() < 0.5 ? -1 : 1;
+    const randPosNegY = Math.random() < 0.5 ? -1 : 1;
+    return new Vector(
+      (Math.random() * (max - min) + min) * randPosNegX,
+      (Math.random() * (max - min) + min) * randPosNegY
+    );
   }
 }
