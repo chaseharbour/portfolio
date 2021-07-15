@@ -1,3 +1,5 @@
+import { toDegrees, toRadians } from "../helpers/conversions";
+
 export default class Boid {
   constructor(x, y, r, speed) {
     this.x = x;
@@ -6,7 +8,8 @@ export default class Boid {
     this.speed = speed;
     this.Xvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
     this.Yvelocity = this.speed * Math.random() < 0.5 ? -1 : 1;
-    this.perception = 40;
+    this.head = 0;
+    this.perception = 20;
   }
 
   draw(ctx, color = "#fff") {
@@ -32,6 +35,7 @@ export default class Boid {
     }
     this.x += this.Xvelocity;
     this.y += this.Yvelocity;
+    //console.log(this.Xvelocity);
   }
 
   perceptionField(ctx) {
@@ -41,19 +45,53 @@ export default class Boid {
     ctx.fill();
   }
 
+  length() {
+    return Math.hypot(this.x, this.y);
+  }
+
+  heading() {
+    return (this.head = Math.atan2(this.y, this.x));
+  }
+
+  steering(heading) {
+    const dx = Math.cos(heading);
+    const dy = Math.sin(heading);
+
+    this.x += dx;
+    this.y += dy;
+  }
+
   separation(boids, ctx) {
     const separationFactor = 30;
-    boids.forEach((boid, i) => {
-      //Check how close other boids are, color boid red if within separationFactor
+    boids.map((boid, i) => {
+      //Check how close other boids are, color boid red if within this.perception
       let dx = boid.x - this.x;
       let dy = boid.y - this.y;
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
+      const headingWeight = this.perception;
 
       if (hitDetection < this.perception && hitDetection !== 0) {
-        return boid.draw(ctx, "red");
-      }
+        //Calculate dot product
+        const dotProduct = this.x * boid.x + this.y * boid.y;
+        //Calculate angle between the two boids
+        const angleBetween = Math.acos(
+          dotProduct / (this.length() * boid.length())
+        );
 
-      return boid.draw(ctx, "#fff");
+        //Calculate new heading for this
+        let newHeading = this.head + headingWeight * (boid.head - this.head);
+
+        if (dotProduct > 0) {
+          return this.steering(newHeading);
+        }
+
+        return;
+        //console.log(toDegrees(angleBetween));
+        //Steer this boid toward that angle
+        //return boid.draw(ctx, "red");
+      }
+      return;
+      //return boid.draw(ctx, "#fff");
     });
   }
 }

@@ -13,7 +13,7 @@ const Canvas = (props) => {
     for (let i = 0; i < 10; i++) {
       randX = Math.random() * 300;
       randY = Math.random() * 150;
-      boids.push(new Boid(randX, randY, 8, Math.random() * 2));
+      boids.push(new Boid(randX, randY, 6, Math.random() * 2));
     }
   }, [boids]);
 
@@ -30,9 +30,11 @@ const Canvas = (props) => {
       boids.map((boid, i) => {
         boid.draw(context);
         boid.move(context);
+        boid.heading();
+        boid.separation(boids, context);
       });
       boids[1].perceptionField(context);
-      boids[1].separation(boids, context);
+      //boids[1].separation(boids, context);
 
       animationFrameId = window.requestAnimationFrame(render);
     };
