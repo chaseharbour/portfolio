@@ -1,70 +1,41 @@
 import { toDegrees, toRadians } from "../helpers/conversions";
+import { deltaX, deltaY } from "../helpers/deltas";
 import Vector from "./vector";
 
 export default class Boid {
   constructor(x, y, r, speed) {
     this.position = new Vector(x, y);
-    this.x = this.position.components[0];
-    this.y = this.position.components[1];
+    this.x = this.position.x;
+    this.y = this.position.y;
     this.r = r;
     this.speed = speed;
     this.velocity = new Vector(1, 1).random2D(2, 5);
-    this.acceleration = new Vector();
+    this.acceleration = new Vector(1, 1);
     this.head = 0;
-    this.maxForce = 2;
-    this.maxSpeed = 1;
-    this.perception = 70;
-  }
-
-  draw(ctx, color = "#fff") {
-    //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(
-      this.position.components[0],
-      this.position.components[1],
-      this.r,
-      0,
-      2 * Math.PI
-    );
-    ctx.fill();
-  }
-
-  move() {
-    let newPos = this.position.add(this.velocity);
-    let velLimit = this.velocity.limit(this.maxSpeed);
-    let newVel = this.velocity.add(this.acceleration);
-
-    this.position = newPos;
-    this.velocity = newVel;
-    this.velocity = velLimit;
+    this.maxForce = 0.1;
+    this.maxSpeed = 2;
+    this.perception = 30;
   }
 
   edgeDetect(ctx) {
-    if (this.position.components[0] >= ctx.canvas.width) {
-      this.position.components[0] = 0;
+    if (this.position.x >= ctx.canvas.width) {
+      this.position.x = 0;
     }
-    if (this.position.components[1] >= ctx.canvas.height) {
-      this.position.components[1] = 0;
+    if (this.position.y >= ctx.canvas.height) {
+      this.position.y = 0;
     }
-    if (this.position.components[0] < 0) {
-      this.position.components[0] = ctx.canvas.width;
+    if (this.position.componentsx < 0) {
+      this.position.componentsx = ctx.canvas.width;
     }
-    if (this.position.components[1] < 0) {
-      this.position.components[1] = ctx.canvas.height;
+    if (this.position.y < 0) {
+      this.position.y = ctx.canvas.height;
     }
   }
 
   perceptionField(ctx) {
     ctx.fillStyle = "rgba(219, 219, 219, 0.5)";
     ctx.beginPath();
-    ctx.arc(
-      this.position.components[0],
-      this.position.components[1],
-      this.perception,
-      0,
-      2 * Math.PI
-    );
+    ctx.arc(this.position.x, this.position.y, this.perception, 0, 2 * Math.PI);
     ctx.fill();
   }
 
@@ -80,12 +51,12 @@ export default class Boid {
     const dx = Math.cos(heading);
     const dy = Math.sin(heading);
 
-    this.x += dx;
-    this.y += dy;
+    return new Vector(dx, dy);
   }
 
   separation(boids, ctx) {
     const separationFactor = 30;
+    let heading;
     boids.map((boid, i) => {
       //Check how close other boids are, color boid red if within this.perception
       let dx = boid.x - this.x;
@@ -111,35 +82,65 @@ export default class Boid {
         return;
         //console.log(toDegrees(angleBetween));
         //Steer this boid toward that angle
-        //return boid.draw(ctx, "red");
       }
       return;
-      //return boid.draw(ctx, "#fff");
     });
   }
 
-  align(boids) {
-    const avgHeading = boids.reduce(
-      (prev, curr, i) => {
-        return { vel: (prev.velocity + curr.velocity) / (i + 1) };
-      },
-      { vel: 0 }
-    );
+  align(boids, ctx) {
+    //Alignment vector is not being updated
+    let initAlignment = new Vector(1, 1);
+    let alignment = new Vector().random2D(1, 2);
+    let boidsInRange = 0;
 
-    //Makes boids poof??
     boids.map((boid, i) => {
-      let dx = boid.x - this.x;
-      let dy = boid.y - this.y;
+      let dx = deltaX(boid, this);
+      let dy = deltaY(boid, this);
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
 
       if (boid != this && hitDetection < this.perception) {
-        if (this.velocity + avgHeading <= this.maxForce) {
-          return (boid.velocity = avgHeading.vel);
+        //return boid.draw(ctx, "red");
+        boidsInRange++;
+        //console.log(boidsInRange.length);
+        //Get average of all velocities in range
+        //debugger;
+        if (boidsInRange > 0) {
+          let sumBoidsVel = initAlignment.add(boid.velocity);
+          let avgVel = sumBoidsVel.divideByNum(boidsInRange);
+          let newAlignment = initAlignment
+            .add(avgVel)
+            .multiplyByNum(this.maxForce);
+          return (alignment = newAlignment);
         }
-        //return (this.velocity = avgHeading.vel);
+        //Add the average to this boid's velocity
       }
 
-      return;
+      //return boid.draw(ctx);
     });
+    //debugger;
+    return alignment;
+  }
+
+  flocking(boids) {
+    let alignment = this.align(boids);
+    this.acceleration = this.acceleration.add(alignment);
+  }
+
+  move() {
+    //this.acceleration = this.acceleration.multiply(new Vector(0, 0));
+    let newVel = this.velocity.add(this.acceleration).limit(this.maxSpeed);
+
+    this.velocity = newVel;
+    let newPos = this.position.add(this.velocity);
+
+    this.position = newPos;
+  }
+
+  draw(ctx, color = "#fff") {
+    //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
+    ctx.fill();
   }
 }

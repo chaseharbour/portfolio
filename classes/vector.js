@@ -1,47 +1,45 @@
 import { toDegrees, toRadians } from "../helpers/conversions";
 
 export default class Vector {
-  constructor(...components) {
-    this.components = components;
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
   }
 
-  add({ components }) {
-    return new Vector(
-      ...components.map((component, i) => this.components[i] + component)
-    );
+  add(vec) {
+    return new Vector(this.x + vec.x, this.y + vec.y);
   }
 
-  subtract({ components }) {
-    return new Vector(
-      ...components.map((component, i) => this.components[i] - component)
-    );
+  subtract(vec) {
+    return new Vector(this.x - vec.x, this.y - vec.y);
   }
 
-  multiply({ components }) {
-    return new Vector(
-      ...components.map((component, i) => this.components[i] * component)
-    );
+  multiply(vec) {
+    return new Vector(this.x * vec.x, this.y * vec.y);
   }
 
-  divide({ components }) {
-    return new Vector(
-      ...components.map((component, i) => this.components[i] / component)
-    );
+  multiplyByNum(num) {
+    return new Vector(this.x * num, this.y * num);
+  }
+
+  divideByVec(vec) {
+    return new Vector(this.x / vec.x, this.y / vec.y);
+  }
+
+  divideByNum(num) {
+    return new Vector(this.x / num, this.y / num);
   }
 
   scaleBy(num) {
-    return new Vector(...this.components.map((component) => component * num));
+    return new Vector(this.x * num, this.y * num);
   }
 
   length() {
-    return Math.hypot(...this.components);
+    return Math.hypot(this.x, this.y);
   }
 
-  dotProduct({ components }) {
-    return components.reduce(
-      (acc, component, i) => acc + component * this.components[i],
-      0
-    );
+  dotProduct(vec) {
+    return this.x * vec.x + this.y * vec.y;
   }
 
   normalize() {

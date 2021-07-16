@@ -12,10 +12,10 @@ const Canvas = (props) => {
   let randY;
 
   useEffect(() => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 30; i++) {
       randX = Math.random() * 300;
       randY = Math.random() * 150;
-      boids.push(new Boid(randX, randY, 6, 2));
+      boids.push(new Boid(randX, randY, 4, 2));
     }
   }, [boids]);
 
@@ -32,13 +32,12 @@ const Canvas = (props) => {
       boids.map((boid, i) => {
         boid.draw(context);
         boid.edgeDetect(context);
-        //boid.heading();
-        //boid.separation(boids, context);
-        //boid.align(boids);
+        boid.flocking(boids);
         boid.move();
       });
       boids[0].perceptionField(context);
-      console.log(boids[0].velocity.normalize());
+      //console.log(boids[0].align(boids, context));
+      //console.log(boids[0].align());
 
       animationFrameId = window.requestAnimationFrame(render);
     };
