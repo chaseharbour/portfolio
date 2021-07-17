@@ -10,6 +10,10 @@ export default class Vector {
     return new Vector(this.x + vec.x, this.y + vec.y);
   }
 
+  addByNum(num) {
+    return new Vector(this.x + num, this.y + num);
+  }
+
   subtract(vec) {
     return new Vector(this.x - vec.x, this.y - vec.y);
   }

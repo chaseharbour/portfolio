@@ -10,11 +10,11 @@ export default class Boid {
     this.r = r;
     this.speed = speed;
     this.velocity = new Vector(1, 1).random2D(2, 5);
-    this.acceleration = new Vector(1, 1);
+    this.acceleration = new Vector();
     this.head = 0;
-    this.maxForce = 0.1;
-    this.maxSpeed = 2;
-    this.perception = 30;
+    this.maxForce = 0.001;
+    this.maxSpeed = 1.5;
+    this.perception = 10;
   }
 
   edgeDetect(ctx) {
@@ -48,49 +48,53 @@ export default class Boid {
   }
 
   steering(heading) {
-    const dx = Math.cos(heading);
-    const dy = Math.sin(heading);
+    const dx = Math.cos(heading.x);
+    const dy = Math.sin(heading.y);
 
     return new Vector(dx, dy);
   }
 
   separation(boids, ctx) {
-    const separationFactor = 30;
-    let heading;
+    let heading = new Vector();
+    let newHeading;
+    let boidsInRange = 0;
+    let dotProduct = 0;
+    const headingWeight = 0.001;
+
     boids.map((boid, i) => {
       //Check how close other boids are, color boid red if within this.perception
-      let dx = boid.x - this.x;
-      let dy = boid.y - this.y;
+      let dx = deltaX(boid, this);
+      let dy = deltaY(boid, this);
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
-      const headingWeight = this.perception;
 
       if (boid != this && hitDetection < this.perception) {
+        boidsInRange++;
         //Calculate dot product
-        const dotProduct = this.x * boid.x + this.y * boid.y;
-        //Calculate angle between the two boids
-        const angleBetween = Math.acos(
-          dotProduct / (this.length() * boid.length())
-        );
+        dotProduct = this.velocity.dotProduct(boid.velocity);
 
         //Calculate new heading for this
-        let newHeading = this.head + headingWeight * (boid.head - this.head);
+        newHeading = heading
+          .addByNum(headingWeight)
+          .multiply(boid.velocity.subtract(this.velocity))
+          .multiplyByNum(this.maxForce);
 
-        if (dotProduct > 0) {
-          return boid.steering(newHeading);
-        }
+        // this.velocity + headingWeight * (boid.velocity - this.velocity);
 
-        return;
         //console.log(toDegrees(angleBetween));
         //Steer this boid toward that angle
       }
-      return;
+
+      if (dotProduct > 0 && boidsInRange > 0) {
+        return (heading = heading.add(boid.steering(newHeading)));
+      }
     });
+    return heading;
   }
 
   align(boids, ctx) {
     //Alignment vector is not being updated
     let initAlignment = new Vector(1, 1);
-    let alignment = new Vector().random2D(1, 2);
+    let alignment = new Vector(0, 0);
     let boidsInRange = 0;
 
     boids.map((boid, i) => {
@@ -123,6 +127,8 @@ export default class Boid {
 
   flocking(boids) {
     let alignment = this.align(boids);
+    let separation = this.separation(boids);
+    this.position = this.position.add(separation);
     this.acceleration = this.acceleration.add(alignment);
   }
 
