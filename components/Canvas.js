@@ -33,7 +33,7 @@ const Canvas = (props) => {
         boid.draw(context);
         boid.edgeDetect(context);
         boid.flocking(boids);
-        boid.move();
+        //boid.move();
       });
       boids[0].perceptionField(context);
       //console.log(boids[0].align(boids, context));

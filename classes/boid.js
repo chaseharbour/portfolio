@@ -9,12 +9,12 @@ export default class Boid {
     this.y = this.position.y;
     this.r = r;
     this.speed = speed;
-    this.velocity = new Vector(1, 1).random2D(2, 5);
+    this.velocity = new Vector().random2D(2, 5);
     this.acceleration = new Vector();
     this.head = 0;
-    this.maxForce = 0.001;
-    this.maxSpeed = 1.5;
-    this.perception = 10;
+    this.maxForce = 5;
+    this.maxSpeed = 1;
+    this.perception = 20;
   }
 
   edgeDetect(ctx) {
@@ -54,7 +54,7 @@ export default class Boid {
     return new Vector(dx, dy);
   }
 
-  separation(boids, ctx) {
+  separation(boids) {
     let heading = new Vector();
     let newHeading;
     let boidsInRange = 0;
@@ -70,31 +70,32 @@ export default class Boid {
       if (boid != this && hitDetection < this.perception) {
         boidsInRange++;
         //Calculate dot product
-        dotProduct = this.velocity.dotProduct(boid.velocity);
+        // dotProduct = this.velocity.dotProduct(boid.velocity);
 
         //Calculate new heading for this
-        newHeading = heading
-          .addByNum(headingWeight)
-          .multiply(boid.velocity.subtract(this.velocity))
-          .multiplyByNum(this.maxForce);
+        // newHeading = heading
+        //   .addByNum(headingWeight)
+        //   .multiply(boid.velocity.subtract(this.velocity))
+        //   .multiplyByNum(this.maxForce);
 
         // this.velocity + headingWeight * (boid.velocity - this.velocity);
+
+        heading = heading.subtract(boid.position.subtract(this.position));
 
         //console.log(toDegrees(angleBetween));
         //Steer this boid toward that angle
       }
 
-      if (dotProduct > 0 && boidsInRange > 0) {
-        return (heading = heading.add(boid.steering(newHeading)));
-      }
+      // if (dotProduct > 0 && boidsInRange > 0) {
+      //   return (heading = heading.add(boid.steering(newHeading)));
+      // }
     });
     return heading;
   }
 
   align(boids, ctx) {
     //Alignment vector is not being updated
-    let initAlignment = new Vector(1, 1);
-    let alignment = new Vector(0, 0);
+    let alignment = new Vector();
     let boidsInRange = 0;
 
     boids.map((boid, i) => {
@@ -108,38 +109,33 @@ export default class Boid {
         //console.log(boidsInRange.length);
         //Get average of all velocities in range
         //debugger;
-        if (boidsInRange > 0) {
-          let sumBoidsVel = initAlignment.add(boid.velocity);
-          let avgVel = sumBoidsVel.divideByNum(boidsInRange);
-          let newAlignment = initAlignment
-            .add(avgVel)
-            .multiplyByNum(this.maxForce);
-          return (alignment = newAlignment);
-        }
+        // if (boidsInRange > 0) {
+        //   let sumBoidsVel = alignment.add(boid.velocity);
+        //   let avgVel = sumBoidsVel.divideByNum(boidsInRange);
+        //   return (alignment = alignment
+        //     .add(avgVel)
+        //     .multiplyByNum(this.maxForce));
+        // }
+        alignment = alignment.add(boid.velocity);
         //Add the average to this boid's velocity
       }
 
       //return boid.draw(ctx);
     });
-    //debugger;
-    return alignment;
+
+    if (boidsInRange > 0) {
+      alignment = alignment.divideByNum(boidsInRange);
+    }
+    return (alignment = alignment
+      .subtract(this.velocity)
+      .divideByNum(this.maxForce));
   }
 
   flocking(boids) {
     let alignment = this.align(boids);
     let separation = this.separation(boids);
-    this.position = this.position.add(separation);
-    this.acceleration = this.acceleration.add(alignment);
-  }
-
-  move() {
-    //this.acceleration = this.acceleration.multiply(new Vector(0, 0));
-    let newVel = this.velocity.add(this.acceleration).limit(this.maxSpeed);
-
-    this.velocity = newVel;
-    let newPos = this.position.add(this.velocity);
-
-    this.position = newPos;
+    this.velocity = this.velocity.add(alignment).limit(this.maxSpeed);
+    this.position = this.position.add(this.velocity);
   }
 
   draw(ctx, color = "#fff") {
