@@ -34,7 +34,7 @@ const Canvas = (props) => {
         boid.flocking(boids);
         boid.edgeDetect(context);
       });
-      boids[0].perceptionField(context);
+      //boids[0].perceptionField(context);
       //console.log(boids[0].align(boids, context));
       //console.log(boids[0].align());
 

@@ -2,6 +2,8 @@ import { toDegrees, toRadians } from "../helpers/conversions";
 import { deltaX, deltaY } from "../helpers/deltas";
 import Vector from "./vector";
 
+const hitDetection = (dx, dy) => Math.sqrt(dx ** 2 + dy ** 2);
+
 export default class Boid {
   constructor(x, y, r, speed) {
     this.position = new Vector(x, y);
@@ -9,6 +11,7 @@ export default class Boid {
     this.y = this.position.y;
     this.r = r;
     this.speed = speed;
+    this.angleOfFlight = 0;
     this.velocity = new Vector().random2D(2, 5);
     this.acceleration = new Vector();
     this.alignmentFactor = 0.0005;
@@ -40,6 +43,10 @@ export default class Boid {
     ctx.fill();
   }
 
+  heading() {
+    return Math.atan2(this.y, this.x);
+  }
+
   cohesion(boids) {
     let cohesion = new Vector();
     let boidsInRange = 0;
@@ -47,9 +54,9 @@ export default class Boid {
     boids.map((boid, i) => {
       let dx = deltaX(boid, this);
       let dy = deltaY(boid, this);
-      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
+      let hit = hitDetection(dx, dy);
 
-      if (boid != this && hitDetection < this.perception) {
+      if (boid != this && hit < this.perception) {
         boidsInRange++;
 
         cohesion = cohesion.add(boid.position);
@@ -71,9 +78,9 @@ export default class Boid {
       //Check how close other boids are, color boid red if within this.perception
       let dx = deltaX(boid, this);
       let dy = deltaY(boid, this);
-      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
+      let hit = hitDetection(dx, dy);
 
-      if (boid != this && hitDetection < this.perception) {
+      if (boid != this && hit < this.perception) {
         heading = heading
           .subtract(boid.position.subtract(this.position))
           .scaleBy(this.separationFactor);
@@ -90,9 +97,9 @@ export default class Boid {
     boids.map((boid, i) => {
       let dx = deltaX(boid, this);
       let dy = deltaY(boid, this);
-      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
+      let hit = hitDetection(dx, dy);
 
-      if (boid != this && hitDetection < this.perception) {
+      if (boid != this && hit < this.perception) {
         boidsInRange++;
 
         alignment = alignment.add(boid.velocity);
@@ -117,14 +124,19 @@ export default class Boid {
       .add(cohesion)
       .limit(this.maxSpeed);
     this.position = this.position.add(this.velocity);
+    this.heading();
     //this.velocity = this.velocity.add(new Vector().random2D(0.2, 0.5));
   }
 
   draw(ctx, color = "#fff") {
-    //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.fillStyle = color;
+    let theta = toDegrees(this.angleOfFlight);
+    ctx.rotate(this.heading());
     ctx.beginPath();
-    ctx.arc(this.position.x, this.position.y, this.r, 0, 2 * Math.PI);
+    ctx.moveTo(this.position.x, this.position.y);
+    ctx.lineTo(this.position.x + this.r, this.position.y + -this.r * 3);
+    ctx.lineTo(this.position.x + this.r * 2, this.position.y);
+    ctx.closePath();
+    ctx.fillStyle = color;
     ctx.fill();
   }
 }
