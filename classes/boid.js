@@ -11,10 +11,11 @@ export default class Boid {
     this.speed = speed;
     this.velocity = new Vector().random2D(2, 5);
     this.acceleration = new Vector();
-    this.head = 0;
-    this.maxForce = 5;
-    this.maxSpeed = 1;
-    this.perception = 20;
+    this.alignmentFactor = 0.0005;
+    this.cohesionFactor = 0.00001;
+    this.separationFactor = 0.09;
+    this.maxSpeed = 1.5;
+    this.perception = 12;
   }
 
   edgeDetect(ctx) {
@@ -24,8 +25,8 @@ export default class Boid {
     if (this.position.y >= ctx.canvas.height) {
       this.position.y = 0;
     }
-    if (this.position.componentsx < 0) {
-      this.position.componentsx = ctx.canvas.width;
+    if (this.position.x < 0) {
+      this.position.x = ctx.canvas.width;
     }
     if (this.position.y < 0) {
       this.position.y = ctx.canvas.height;
@@ -39,27 +40,32 @@ export default class Boid {
     ctx.fill();
   }
 
-  length() {
-    return Math.hypot(this.x, this.y);
-  }
+  cohesion(boids) {
+    let cohesion = new Vector();
+    let boidsInRange = 0;
 
-  heading() {
-    return (this.head = Math.atan2(this.y, this.x));
-  }
+    boids.map((boid, i) => {
+      let dx = deltaX(boid, this);
+      let dy = deltaY(boid, this);
+      const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
 
-  steering(heading) {
-    const dx = Math.cos(heading.x);
-    const dy = Math.sin(heading.y);
+      if (boid != this && hitDetection < this.perception) {
+        boidsInRange++;
 
-    return new Vector(dx, dy);
+        cohesion = cohesion.add(boid.position);
+      }
+    });
+
+    if (boidsInRange > 0) {
+      cohesion = cohesion.divideByNum(boidsInRange);
+    }
+    return (cohesion = cohesion
+      .subtract(this.position)
+      .scaleBy(this.cohesionFactor));
   }
 
   separation(boids) {
     let heading = new Vector();
-    let newHeading;
-    let boidsInRange = 0;
-    let dotProduct = 0;
-    const headingWeight = 0.001;
 
     boids.map((boid, i) => {
       //Check how close other boids are, color boid red if within this.perception
@@ -68,27 +74,10 @@ export default class Boid {
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
 
       if (boid != this && hitDetection < this.perception) {
-        boidsInRange++;
-        //Calculate dot product
-        // dotProduct = this.velocity.dotProduct(boid.velocity);
-
-        //Calculate new heading for this
-        // newHeading = heading
-        //   .addByNum(headingWeight)
-        //   .multiply(boid.velocity.subtract(this.velocity))
-        //   .multiplyByNum(this.maxForce);
-
-        // this.velocity + headingWeight * (boid.velocity - this.velocity);
-
-        heading = heading.subtract(boid.position.subtract(this.position));
-
-        //console.log(toDegrees(angleBetween));
-        //Steer this boid toward that angle
+        heading = heading
+          .subtract(boid.position.subtract(this.position))
+          .scaleBy(this.separationFactor);
       }
-
-      // if (dotProduct > 0 && boidsInRange > 0) {
-      //   return (heading = heading.add(boid.steering(newHeading)));
-      // }
     });
     return heading;
   }
@@ -104,23 +93,10 @@ export default class Boid {
       const hitDetection = Math.sqrt(dx ** 2 + dy ** 2);
 
       if (boid != this && hitDetection < this.perception) {
-        //return boid.draw(ctx, "red");
         boidsInRange++;
-        //console.log(boidsInRange.length);
-        //Get average of all velocities in range
-        //debugger;
-        // if (boidsInRange > 0) {
-        //   let sumBoidsVel = alignment.add(boid.velocity);
-        //   let avgVel = sumBoidsVel.divideByNum(boidsInRange);
-        //   return (alignment = alignment
-        //     .add(avgVel)
-        //     .multiplyByNum(this.maxForce));
-        // }
-        alignment = alignment.add(boid.velocity);
-        //Add the average to this boid's velocity
-      }
 
-      //return boid.draw(ctx);
+        alignment = alignment.add(boid.velocity);
+      }
     });
 
     if (boidsInRange > 0) {
@@ -128,14 +104,20 @@ export default class Boid {
     }
     return (alignment = alignment
       .subtract(this.velocity)
-      .divideByNum(this.maxForce));
+      .scaleBy(this.alignmentFactor));
   }
 
   flocking(boids) {
     let alignment = this.align(boids);
     let separation = this.separation(boids);
-    this.velocity = this.velocity.add(alignment).limit(this.maxSpeed);
+    let cohesion = this.cohesion(boids);
+    this.velocity = this.velocity
+      .add(separation)
+      .add(alignment)
+      .add(cohesion)
+      .limit(this.maxSpeed);
     this.position = this.position.add(this.velocity);
+    //this.velocity = this.velocity.add(new Vector().random2D(0.2, 0.5));
   }
 
   draw(ctx, color = "#fff") {
