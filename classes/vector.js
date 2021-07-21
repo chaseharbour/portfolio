@@ -72,4 +72,12 @@ export default class Vector {
       (Math.random() * (max - min) + min) * randPosNegY
     );
   }
+
+  heading() {
+    return Math.atan2(this.y, this.x);
+  }
+
+  mag() {
+    return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+  }
 }

@@ -37,7 +37,6 @@ const Canvas = (props) => {
       //boids[0].perceptionField(context);
       //console.log(boids[0].align(boids, context));
       //console.log(boids[0].align());
-
       animationFrameId = window.requestAnimationFrame(render);
     };
 
