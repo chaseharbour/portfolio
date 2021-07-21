@@ -11,20 +11,35 @@ const Canvas = (props) => {
   let randX;
   let randY;
 
-  useEffect(() => {
-    for (let i = 0; i < 20; i++) {
-      randX = Math.random() * 300;
-      randY = Math.random() * 150;
-      boids.push(new Boid(randX, randY, 4, 2));
-    }
-  }, [boids]);
+  const resizeCanvas = (canvas) => {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+  };
+
+  // useEffect(() => {
+  //   for (let i = 0; i < 25; i++) {
+  //     randX = Math.random() * 300;
+  //     randY = Math.random() * 150;
+  //     boids.push(new Boid(randX, randY, 4, 2));
+  //   }
+  // }, [boids]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
+    const min = Math.min(context.canvas.height, context.canvas.width);
+
     let animationFrameId;
     let frameCount = 0;
+
+    for (let i = 0; i < 65; i++) {
+      randX = Math.random() * context.canvas.width;
+      randY = Math.random() * context.canvas.height;
+      boids.push(new Boid(randX, randY, min * 0.018, 2));
+    }
+
+    resizeCanvas(canvas);
 
     const render = () => {
       frameCount++;

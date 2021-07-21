@@ -4,6 +4,16 @@ import Vector from "./vector";
 
 const hitDetection = (dx, dy) => Math.sqrt(dx ** 2 + dy ** 2);
 
+/*
+Values that provide decent behavior on small screens:
+
+this.alignmentFactor = 0.005;
+this.cohesionFactor = 0.00008;
+this.separationFactor = 0.03;
+this.maxSpeed = 2;
+this.perception = 20;
+*/
+
 export default class Boid {
   constructor(x, y, r, speed) {
     this.position = new Vector(x, y);
@@ -13,11 +23,11 @@ export default class Boid {
     this.speed = speed;
     this.velocity = new Vector().random2D(2, 5);
     this.acceleration = new Vector();
-    this.alignmentFactor = 0.0005;
-    this.cohesionFactor = 0.00001;
-    this.separationFactor = 0.09;
-    this.maxSpeed = 1;
-    this.perception = 12;
+    this.alignmentFactor = 0.00002;
+    this.cohesionFactor = 0.00004;
+    this.separationFactor = 0.04;
+    this.maxSpeed = 2;
+    this.perception = 20;
   }
 
   edgeDetect(ctx) {
@@ -81,6 +91,10 @@ export default class Boid {
         steering = steering
           .subtract(boid.position.subtract(this.position))
           .scaleBy(this.separationFactor);
+      }
+
+      if (boidsInRange > 0) {
+        steering = steering.divideByNum(boidsInRange);
       }
     });
     return steering;
