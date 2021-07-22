@@ -15,16 +15,17 @@ this.perception = 20;
 */
 
 export default class Boid {
-  constructor(x, y, r, speed) {
+  constructor(x, y, r, speed, color = "#fff") {
     this.position = new Vector(x, y);
     this.x = this.position.x;
     this.y = this.position.y;
     this.r = r;
+    this.color = color;
     this.speed = speed;
-    this.velocity = new Vector().random2D(2, 5);
+    this.velocity = new Vector().random2D(2, 10);
     this.acceleration = new Vector();
-    this.alignmentFactor = 0.00002;
-    this.cohesionFactor = 0.00004;
+    this.alignmentFactor = 0.007;
+    this.cohesionFactor = 0.00008;
     this.separationFactor = 0.04;
     this.maxSpeed = 2;
     this.perception = 20;
@@ -45,6 +46,31 @@ export default class Boid {
     }
   }
 
+  bounding(ctx) {
+    const [Xmin, Xmax, Ymin, Ymax] = [
+      0 - 5,
+      ctx.canvas.width + 5,
+      0 - 5,
+      ctx.canvas.height + 5,
+    ];
+    const direction = new Vector();
+
+    const adjustmentFactor = 2;
+
+    if (this.position.x < Xmin) {
+      direction.x = adjustmentFactor;
+    } else if (this.position.x > Xmax) {
+      direction.x = -adjustmentFactor;
+    }
+    if (this.position.y < Ymin) {
+      direction.y = adjustmentFactor;
+    } else if (this.position.y > Ymax) {
+      direction.y = -adjustmentFactor;
+    }
+
+    return direction;
+  }
+
   perceptionField(ctx) {
     ctx.fillStyle = "rgba(219, 219, 219, 0.5)";
     ctx.beginPath();
@@ -53,6 +79,7 @@ export default class Boid {
   }
 
   cohesion(boids) {
+    const cohesionRange = 5;
     let cohesion = new Vector();
     let boidsInRange = 0;
 
@@ -61,7 +88,7 @@ export default class Boid {
       let dy = deltaY(boid, this);
       let hit = hitDetection(dx, dy);
 
-      if (boid != this && hit < this.perception) {
+      if (boid != this && hit < cohesionRange) {
         boidsInRange++;
 
         cohesion = cohesion.add(boid.position);
@@ -102,6 +129,7 @@ export default class Boid {
 
   align(boids, ctx) {
     //Alignment vector is not being updated
+    const alignmentRange = 10;
     let alignment = new Vector();
     let boidsInRange = 0;
 
@@ -110,7 +138,7 @@ export default class Boid {
       let dy = deltaY(boid, this);
       let hit = hitDetection(dx, dy);
 
-      if (boid != this && hit < this.perception) {
+      if (boid != this && hit < alignmentRange) {
         boidsInRange++;
 
         alignment = alignment.add(boid.velocity);
@@ -125,21 +153,23 @@ export default class Boid {
       .scaleBy(this.alignmentFactor));
   }
 
-  flocking(boids) {
+  flocking(boids, ctx) {
     let alignment = this.align(boids);
     let separation = this.separation(boids);
     let cohesion = this.cohesion(boids);
+    let bounding = this.bounding(ctx);
     this.velocity = this.velocity
       .add(separation)
       .add(alignment)
       .add(cohesion)
+      .add(bounding)
       .limit(this.maxSpeed);
     this.position = this.position.add(this.velocity);
 
     //this.velocity = this.velocity.add(new Vector().random2D(0.2, 0.5));
   }
 
-  draw(ctx, color = "#fff") {
+  draw(ctx) {
     let theta = this.velocity.heading() + toRadians(90);
     ctx.setTransform(1, 0, 0, 1, this.position.x, this.position.y);
     ctx.rotate(theta);
@@ -148,11 +178,7 @@ export default class Boid {
     ctx.lineTo(-this.r, this.r * 2);
     ctx.lineTo(this.r, this.r * 2);
     ctx.closePath();
-    // ctx.moveTo(this.position.x, this.position.y);
-    // ctx.lineTo(this.position.x + this.r, this.position.y + -this.r * 3);
-    // ctx.lineTo(this.position.x + this.r * 2, this.position.y);
-    // ctx.closePath();
-    ctx.fillStyle = color;
+    ctx.fillStyle = this.color;
     ctx.fill();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }

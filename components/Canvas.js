@@ -7,6 +7,7 @@ const Canvas = (props) => {
   const canvasRef = useRef(null);
 
   const boids = [];
+  const colors = ["#e1bc29", "#ff4960", "#2f8dda"];
 
   let randX;
   let randY;
@@ -33,10 +34,11 @@ const Canvas = (props) => {
     let animationFrameId;
     let frameCount = 0;
 
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 40; i++) {
+      let randColor = Math.floor(Math.random() * colors.length);
       randX = Math.random() * context.canvas.width;
       randY = Math.random() * context.canvas.height;
-      boids.push(new Boid(randX, randY, min * 0.018, 2));
+      boids.push(new Boid(randX, randY, min * 0.018, 2, colors[randColor]));
     }
 
     resizeCanvas(canvas);
@@ -46,8 +48,8 @@ const Canvas = (props) => {
       context.clearRect(0, 0, context.canvas.width, context.canvas.height);
       boids.map((boid, i) => {
         boid.draw(context);
-        boid.flocking(boids);
-        boid.edgeDetect(context);
+        boid.flocking(boids, context);
+        //boid.edgeDetect(context);
       });
       //boids[0].perceptionField(context);
       //console.log(boids[0].align(boids, context));
