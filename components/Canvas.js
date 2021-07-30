@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Boid from "../classes/boid";
 
 import canvasStyles from "../styles/_canvas.module.scss";
@@ -12,19 +12,6 @@ const Canvas = (props) => {
   let randX;
   let randY;
 
-  const resizeCanvas = (canvas) => {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-  };
-
-  // useEffect(() => {
-  //   for (let i = 0; i < 25; i++) {
-  //     randX = Math.random() * 300;
-  //     randY = Math.random() * 150;
-  //     boids.push(new Boid(randX, randY, 4, 2));
-  //   }
-  // }, [boids]);
-
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -34,14 +21,12 @@ const Canvas = (props) => {
     let animationFrameId;
     let frameCount = 0;
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 60; i++) {
       let randColor = Math.floor(Math.random() * colors.length);
       randX = Math.random() * context.canvas.width;
       randY = Math.random() * context.canvas.height;
       boids.push(new Boid(randX, randY, min * 0.018, 2, colors[randColor]));
     }
-
-    resizeCanvas(canvas);
 
     const render = () => {
       frameCount++;
@@ -61,8 +46,23 @@ const Canvas = (props) => {
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
+      canvas.removeEventListener("resize", resizeCanvas);
     };
   }, [boids]);
+
+  const resizeCanvas = () => {
+    canvasRef.current.width = canvasRef.current.clientWidth;
+    canvasRef.current.height = canvasRef.current.clientHeight;
+  };
+
+  useEffect(() => {
+    resizeCanvas();
+
+    canvasRef.current.addEventListener("resize", resizeCanvas);
+    return () => {
+      canvasRef.current.removeEventListener("resize", resizeCanvas);
+    };
+  });
 
   return <canvas className={canvasStyles.canvas} ref={canvasRef} {...props} />;
 };

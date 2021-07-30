@@ -5,8 +5,11 @@
   display: grid;
   grid-template-rows: min-content auto min-content;
   background: $bg-primary;
+  margin: 0;
+  padding: 0;
   height: 100vh;
-  width: 100%;
+  max-height: 100vh;
+  //width: 100%;
 
   h1 {
     font-weight: 900;
@@ -20,22 +23,50 @@
   text-transform: uppercase;
   font-size: 3.5rem;
   letter-spacing: $header-spacing;
+
+  @include tablet-screens {
+    font-size: 9.5em;
+  }
 }
 
 .imgContainer {
   display: grid;
-  grid-template-rows: 65% 35%;
-  grid-row-gap: 0.2rem;
+  grid-template-rows: 80% 20%;
+
+  @include tablet-screens {
+    grid-template-rows: auto min-content;
+
+    .canvasContainer {
+      height: 0;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .imgRight {
+      height: 250px;
+      width: 250px;
+      align-self: end;
+    }
+  }
 }
 
-.imgLeft {
-  height: 100%;
+.canvasContainer {
   width: auto;
-  background-color: $img-bg;
+  height: auto;
 }
+
+// .imgLeft {
+//   height: 100%;
+//   width: 150px;
+//   background-color: $img-bg;
+// }
 .imgRight {
   height: 100%;
-  width: 174px;
+  width: 150px;
   background-color: $img-bg;
   justify-self: left;
 }
@@ -48,4 +79,8 @@
   font-size: 4rem;
   letter-spacing: $header-spacing;
   justify-self: right;
+
+  @include tablet-screens {
+    font-size: 10em;
+  }
 }

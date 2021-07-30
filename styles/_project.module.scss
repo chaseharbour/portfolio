@@ -1,4 +1,5 @@
 @import "utilities/variables.module";
+@import "utilities/mixins.module";
 
 .title {
   position: relative;
@@ -17,6 +18,14 @@
     left: -3%;
     background: #ff4960;
     z-index: -1;
+
+    @include tablet-screens {
+      top: 21px;
+    }
+  }
+
+  @include tablet-screens {
+    font-size: 1.8rem;
   }
 }
 

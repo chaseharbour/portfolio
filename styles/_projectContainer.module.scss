@@ -1,4 +1,5 @@
 @import "utilities/variables.module";
+@import "utilities/mixins.module";
 
 .container {
   position: relative;
@@ -35,6 +36,10 @@
     width: 100%;
     grid-column-start: 1;
     grid-column-end: 4;
+  }
+
+  @include tablet-screens {
+    max-width: 60rem;
   }
 }
 
