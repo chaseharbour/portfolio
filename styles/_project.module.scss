@@ -20,12 +20,21 @@
     z-index: -1;
 
     @include tablet-screens {
-      top: 21px;
+      top: 24px;
+    }
+
+    @include desktop-screens {
+      height: 11px;
+      top: 30px;
     }
   }
 
   @include tablet-screens {
-    font-size: 1.8rem;
+    font-size: 2em;
+  }
+
+  @include desktop-screens {
+    font-size: 2.5em;
   }
 }
 
@@ -43,8 +52,18 @@
   p {
     color: #fff;
     line-height: 1.5rem;
-    font-size: 0.94rem;
+    font-size: 1em;
     font-weight: regular;
     display: inherit;
+
+    @include tablet-screens {
+      line-height: 2.3rem;
+      font-size: 1.4em;
+    }
+
+    @include desktop-screens {
+      line-height: 2.7rem;
+      font-size: 1.7em;
+    }
   }
 }

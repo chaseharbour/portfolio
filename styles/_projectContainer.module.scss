@@ -8,15 +8,38 @@
 }
 
 .title {
-  padding: 0;
+  position: relative;
+  padding: 3rem 0 1.625rem 0;
   margin: 0;
-  padding-bottom: 1.625rem;
   background: $bg-primary;
   color: white;
   font-size: 3em;
   font-family: inherit;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
+  z-index: 2;
+
+  @include tablet-screens {
+    padding: 4rem 0 1.625rem 0;
+    font-size: 5em;
+  }
+
+  @include desktop-screens {
+    margin: 0 0 0 5%;
+    padding: 10rem 0 4rem 0;
+    font-size: 7em;
+
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $text-white;
+      width: 77%;
+      height: 9px;
+      top: 62%;
+      left: 20%;
+      z-index: -1;
+    }
+  }
 }
 
 .inactive {
@@ -41,6 +64,10 @@
   @include tablet-screens {
     max-width: 60rem;
   }
+
+  @include desktop-screens {
+    max-width: 75rem;
+  }
 }
 
 .active {
@@ -59,5 +86,13 @@
     width: 100%;
     grid-column-start: 1;
     grid-column-end: 3;
+  }
+
+  @include tablet-screens {
+    max-width: 60rem;
+  }
+
+  @include desktop-screens {
+    max-width: 75rem;
   }
 }

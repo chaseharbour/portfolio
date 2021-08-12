@@ -13,24 +13,49 @@
   overflow: hidden;
 
   @include tablet-screens {
-    grid-template-columns: minmax(5rem, 70%);
+    //grid-template-columns: minmax(5rem, 70%);
+    max-width: 40rem;
   }
 
   @include desktop-screens {
-    grid-template-columns: minmax(2rem, 40%);
+    //grid-template-columns: minmax(2rem, 40%);
+    max-width: 50rem;
   }
 }
 
 .title {
-  padding: 0;
+  position: relative;
+  padding: 3rem 0 1.625rem 0;
   margin: 0;
-  padding-bottom: 1.625rem;
   background: $bg-primary;
   color: white;
   font-size: 3em;
   font-family: inherit;
   letter-spacing: -0.06rem;
   text-transform: uppercase;
+  z-index: 2;
+
+  @include tablet-screens {
+    padding: 4rem 0 1.625rem 0;
+    font-size: 5em;
+  }
+
+  @include desktop-screens {
+    margin: 0 0 0 5%;
+    padding: 10rem 0 10rem 0;
+    font-size: 7em;
+
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $text-white;
+      width: 75%;
+      height: 9px;
+      top: 50%;
+      left: 22%;
+      z-index: -1;
+    }
+  }
 }
 
 .aboutHeader {
@@ -48,12 +73,17 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: $contrast-blue;
-      height: 6px;
+      background-color: $contrast-yellow;
+      height: 9px;
       width: 94%;
-      top: 36px;
+      top: 33px;
       left: 4%;
       z-index: -1;
+
+      @include tablet-screens {
+        height: 15px;
+        top: 45px;
+      }
     }
   }
   &:nth-of-type(2) {
@@ -61,12 +91,17 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: $contrast-red;
-      height: 6px;
+      background-color: $contrast-blue;
+      height: 9px;
       width: 94%;
-      top: 36px;
+      top: 33px;
       left: 4%;
       z-index: -1;
+
+      @include tablet-screens {
+        height: 15px;
+        top: 45px;
+      }
     }
   }
   &:nth-of-type(3) {
@@ -74,12 +109,17 @@
     &::after {
       content: "";
       position: absolute;
-      background-color: $contrast-yellow;
-      height: 6px;
+      background-color: $contrast-red;
+      height: 9px;
       width: 94%;
-      top: 36px;
+      top: 33px;
       left: 4%;
       z-index: -1;
+
+      @include tablet-screens {
+        height: 15px;
+        top: 45px;
+      }
     }
   }
 
@@ -124,7 +164,7 @@
 
   @include tablet-screens {
     font-size: 1.3em;
-    line-height: 1.4em;
+    line-height: 1.6em;
     padding: 1.5rem;
   }
 }
