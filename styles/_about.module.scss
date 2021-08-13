@@ -18,8 +18,10 @@
   }
 
   @include desktop-screens {
-    grid-template-rows: repeat(3, 28rem);
-    max-width: 50rem;
+    grid-template-columns: repeat(3, 28rem);
+    grid-gap: 5rem;
+    max-width: 80%;
+    justify-content: center;
   }
 }
 
@@ -67,13 +69,14 @@
         position: absolute;
         background-color: $contrast-blue;
         height: 9px;
-        width: 45%;
-        top: 33px;
-        left: 1%;
+        width: 13.5rem;
+        top: 37px;
+        left: 0.8rem;
         z-index: -1;
 
         @include tablet-screens {
           height: 15px;
+          width: 22.5rem;
           top: 52px;
         }
       }
@@ -88,13 +91,14 @@
         position: absolute;
         background-color: $contrast-red;
         height: 9px;
-        width: 45%;
-        top: 33px;
-        left: 1%;
+        width: 13rem;
+        top: 37px;
+        left: 0.8rem;
         z-index: -1;
 
         @include tablet-screens {
           height: 15px;
+          width: 22rem;
           top: 52px;
         }
       }
@@ -109,13 +113,14 @@
         position: absolute;
         background-color: $contrast-yellow;
         height: 9px;
-        width: 55%;
-        top: 33px;
-        left: 1%;
+        width: 16rem;
+        top: 37px;
+        left: 0.8rem;
         z-index: -1;
 
         @include tablet-screens {
           height: 15px;
+          width: 26.5rem;
           top: 52px;
         }
       }

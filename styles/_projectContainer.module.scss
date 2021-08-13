@@ -59,6 +59,13 @@
     width: 100%;
     grid-column-start: 1;
     grid-column-end: 4;
+
+    @include desktop-screens {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 4;
+    }
   }
 
   @include tablet-screens {
@@ -66,7 +73,9 @@
   }
 
   @include desktop-screens {
-    max-width: 75rem;
+    max-width: 80%;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -86,6 +95,13 @@
     width: 100%;
     grid-column-start: 1;
     grid-column-end: 3;
+
+    @include desktop-screens {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 4;
+    }
   }
 
   @include tablet-screens {
@@ -93,6 +109,8 @@
   }
 
   @include desktop-screens {
-    max-width: 75rem;
+    max-width: 80%;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }

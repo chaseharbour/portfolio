@@ -3,7 +3,8 @@
 
 .container {
   display: grid;
-  justify-items: left;
+  justify-content: center;
+  padding: 0 0 2rem 0;
   margin: 0 auto;
   max-width: 30rem;
   background-color: $bg-primary;
@@ -13,7 +14,7 @@
   }
 
   @include desktop-screens {
-    grid-template-columns: minmax(2rem, 40%);
+    max-width: 50rem;
   }
 }
 
@@ -68,10 +69,17 @@
   font-family: $paragraph-font;
   line-height: 1.6rem;
   font-size: 0.94rem;
+  max-width: 12rem;
+  padding: 0 0 1.5rem 0;
 
   @include tablet-screens {
     font-size: 1.2em;
     line-height: 1.4em;
+  }
+
+  @include desktop-screens {
+    max-width: 70%;
+    padding: 0 0 2rem 0;
   }
 }
 
@@ -80,13 +88,17 @@
   text-align: center;
   font-family: $paragraph-font;
   font-weight: bold;
-  color: $text-white;
-  border: 2px solid $text-white;
-  border-radius: 4px;
+  font-size: 0.9em;
+  color: $contrast-yellow;
+  border: 2px solid $contrast-yellow;
   padding: 0.6rem 0.5rem;
+  width: 4rem;
+  //box-shadow: -5px 5px 0px -1px $contrast-red;
 
   &:hover {
     background-color: $text-white;
     color: $text-secondary;
+    transform: translateX(3px);
+    transform: translateY(3px);
   }
 }
