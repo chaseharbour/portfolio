@@ -18,7 +18,7 @@
   }
 
   @include desktop-screens {
-    //grid-template-columns: minmax(2rem, 40%);
+    grid-template-rows: repeat(3, 28rem);
     max-width: 50rem;
   }
 }
@@ -58,6 +58,71 @@
   }
 }
 
+.asideContainer {
+  &:nth-of-type(1) {
+    h2 {
+      color: $contrast-blue;
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: $contrast-blue;
+        height: 9px;
+        width: 45%;
+        top: 33px;
+        left: 1%;
+        z-index: -1;
+
+        @include tablet-screens {
+          height: 15px;
+          top: 52px;
+        }
+      }
+    }
+  }
+
+  &:nth-of-type(2) {
+    h2 {
+      color: $contrast-red;
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: $contrast-red;
+        height: 9px;
+        width: 45%;
+        top: 33px;
+        left: 1%;
+        z-index: -1;
+
+        @include tablet-screens {
+          height: 15px;
+          top: 52px;
+        }
+      }
+    }
+  }
+
+  &:nth-of-type(3) {
+    h2 {
+      color: $contrast-yellow;
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: $contrast-yellow;
+        height: 9px;
+        width: 55%;
+        top: 33px;
+        left: 1%;
+        z-index: -1;
+
+        @include tablet-screens {
+          height: 15px;
+          top: 52px;
+        }
+      }
+    }
+  }
+}
+
 .aboutHeader {
   position: relative;
   padding: 1rem;
@@ -67,61 +132,6 @@
   font-family: $header-font;
   text-transform: uppercase;
   z-index: 2;
-
-  &:nth-of-type(1) {
-    color: $contrast-blue;
-    &::after {
-      content: "";
-      position: absolute;
-      background-color: $contrast-yellow;
-      height: 9px;
-      width: 94%;
-      top: 33px;
-      left: 4%;
-      z-index: -1;
-
-      @include tablet-screens {
-        height: 15px;
-        top: 45px;
-      }
-    }
-  }
-  &:nth-of-type(2) {
-    color: $contrast-red;
-    &::after {
-      content: "";
-      position: absolute;
-      background-color: $contrast-blue;
-      height: 9px;
-      width: 94%;
-      top: 33px;
-      left: 4%;
-      z-index: -1;
-
-      @include tablet-screens {
-        height: 15px;
-        top: 45px;
-      }
-    }
-  }
-  &:nth-of-type(3) {
-    color: $contrast-yellow;
-    &::after {
-      content: "";
-      position: absolute;
-      background-color: $contrast-red;
-      height: 9px;
-      width: 94%;
-      top: 33px;
-      left: 4%;
-      z-index: -1;
-
-      @include tablet-screens {
-        height: 15px;
-        top: 45px;
-      }
-    }
-  }
 
   &::after {
     content: "";
