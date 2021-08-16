@@ -3,9 +3,8 @@
 
 .container {
   display: grid;
-  justify-content: center;
-  padding: 0 0 2rem 0;
-  margin: 0 auto;
+  justify-content: left;
+  padding: 0 0 2rem 2rem;
   max-width: 30rem;
   background-color: $bg-primary;
 
@@ -15,6 +14,8 @@
 
   @include desktop-screens {
     max-width: 50rem;
+    justify-content: center;
+    margin: 0 auto;
   }
 }
 
@@ -44,10 +45,10 @@
       content: "";
       position: absolute;
       background-color: $text-white;
-      width: 59%;
+      width: 70rem;
       height: 9px;
       top: 50%;
-      left: 38%;
+      left: 30%;
       z-index: -1;
     }
   }
@@ -80,20 +81,36 @@
   @include desktop-screens {
     max-width: 70%;
     padding: 0 0 2rem 0;
+
+    font-size: 1.2em;
+    line-height: 2em;
   }
 }
 
 .link {
+  position: relative;
   text-decoration: none;
   text-align: center;
   font-family: $paragraph-font;
   font-weight: bold;
   font-size: 0.9em;
-  color: $contrast-yellow;
-  border: 2px solid $contrast-yellow;
+  color: $bg-primary;
+  background-color: $contrast-blue;
+  //border: 2px solid $contrast-yellow;
   padding: 0.6rem 0.5rem;
   width: 4rem;
+  height: 2rem;
+  z-index: 2;
   //box-shadow: -5px 5px 0px -1px $contrast-red;
+
+  &::after {
+    content: "";
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    left: -2rem;
+    background-color: $contrast-red;
+  }
 
   &:hover {
     background-color: $text-white;

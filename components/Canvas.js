@@ -5,6 +5,7 @@ import canvasStyles from "../styles/_canvas.module.scss";
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
+  const [canvasSize, setCanvasSize] = useState({});
 
   const boids = [];
   const colors = ["#e1bc29", "#ff4960", "#2f8dda"];
@@ -46,7 +47,7 @@ const Canvas = (props) => {
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      canvas.removeEventListener("resize", resizeCanvas);
+      //canvas.removeEventListener("resize", resizeCanvas);
     };
   }, [boids]);
 

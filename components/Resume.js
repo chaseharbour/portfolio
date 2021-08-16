@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 const Resume = () => {
   return (
     <>
-      <h1 className={resumeStyles.title}>Experience</h1>
+      <h1 className={resumeStyles.title}>Contact</h1>
       <article className={resumeStyles.container}>
         <p className={resumeStyles.body}>
           My experience and work history is located at the link below. If you'd

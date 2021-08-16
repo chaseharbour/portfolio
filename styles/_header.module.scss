@@ -27,6 +27,10 @@
   @include tablet-screens {
     font-size: 9.5em;
   }
+
+  @include desktop-screens {
+    margin: 0 0 0 15rem;
+  }
 }
 
 .imgContainer {
@@ -69,6 +73,12 @@
   width: 150px;
   background-color: $img-bg;
   justify-self: left;
+
+  @include desktop-screens {
+    margin: 0 0 0 15rem;
+    height: 100%;
+    width: 100px;
+  }
 }
 
 .lastname {
@@ -82,5 +92,9 @@
 
   @include tablet-screens {
     font-size: 10em;
+  }
+
+  @include desktop-screens {
+    margin: 0 15rem 0 0;
   }
 }

@@ -178,8 +178,13 @@
   }
 
   @include tablet-screens {
-    font-size: 1.3em;
+    font-size: 1.2em;
     line-height: 1.6em;
     padding: 1.5rem;
+  }
+
+  @include desktop-screens {
+    font-size: 1.2em;
+    line-height: 2em;
   }
 }
