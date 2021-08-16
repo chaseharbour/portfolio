@@ -5,6 +5,8 @@ import canvasStyles from "../styles/_canvas.module.scss";
 
 const Canvas = (props) => {
   const canvasRef = useRef(null);
+  const [canvasSize, setCanvasSize] = useState({});
+  const [resize, setResize] = useState(false);
 
   const boids = [];
   const colors = ["#e1bc29", "#ff4960", "#2f8dda"];
@@ -16,6 +18,9 @@ const Canvas = (props) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
+    context.canvas.width = canvasSize.w;
+    context.canvas.height = canvasSize.h;
+
     const min = Math.min(context.canvas.height, context.canvas.width);
 
     let animationFrameId;
@@ -25,7 +30,7 @@ const Canvas = (props) => {
       let randColor = Math.floor(Math.random() * colors.length);
       randX = Math.random() * context.canvas.width;
       randY = Math.random() * context.canvas.height;
-      boids.push(new Boid(randX, randY, min * 0.018, 2, colors[randColor]));
+      boids.push(new Boid(randX, randY, min * 0.012, 2, colors[randColor]));
     }
 
     const render = () => {
@@ -34,6 +39,7 @@ const Canvas = (props) => {
       boids.map((boid, i) => {
         boid.draw(context);
         boid.flocking(boids, context);
+
         //boid.edgeDetect(context);
       });
       //boids[0].perceptionField(context);
@@ -46,21 +52,25 @@ const Canvas = (props) => {
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      canvas.removeEventListener("resize", resizeCanvas);
+      // canvas.removeEventListener("resize", resizeCanvas);
     };
-  }, [boids]);
+  }, [boids, canvasSize]);
 
   const resizeCanvas = () => {
-    canvasRef.current.width = canvasRef.current.clientWidth;
-    canvasRef.current.height = canvasRef.current.clientHeight;
+    setResize(true);
+
+    setCanvasSize({
+      w: canvasRef.current.clientWidth,
+      h: canvasRef.current.clientHeight,
+    });
+
+    setResize(false);
   };
 
   useEffect(() => {
-    resizeCanvas();
-
-    canvasRef.current.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
     return () => {
-      canvasRef.current.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
     };
   });
 
