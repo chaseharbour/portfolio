@@ -1,0 +1,28 @@
+@import "variables.module";
+//A tag with animated effect
+.animLink {
+  position: relative;
+  color: $text-link;
+  font-size: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.animLink::after {
+  content: "";
+  position: absolute;
+  height: 0.12em;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: $text-white;
+  transform-origin: left;
+  transition: transform 300ms;
+}
+
+.animLink:hover::after,
+.animLink:focus::after {
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 200ms;
+}
