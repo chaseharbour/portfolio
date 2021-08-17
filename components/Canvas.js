@@ -18,8 +18,8 @@ const Canvas = (props) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    context.canvas.width = canvasSize.w;
-    context.canvas.height = canvasSize.h;
+    context.canvas.width = canvasSize.w ? canvasSize.w : canvas.clientWidth;
+    context.canvas.height = canvasSize.h ? canvasSize.h : canvas.clientHeight;
 
     const min = Math.min(context.canvas.height, context.canvas.width);
 
