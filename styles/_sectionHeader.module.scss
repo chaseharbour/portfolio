@@ -6,7 +6,15 @@
   display: grid;
   grid-template-columns: min-content auto;
   align-items: center;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+  margin-left: 0.5rem;
 
+  @include tablet-screens {
+    margin-top: 8rem;
+    margin-bottom: 6rem;
+    margin-left: 1.5rem;
+  }
   @include desktop-screens {
     margin-top: 15rem;
     margin-bottom: 10rem;
@@ -26,7 +34,8 @@
   z-index: 2;
 
   @include tablet-screens {
-    padding: 4rem 0 1.625rem 0;
+    padding: 0;
+    margin: 0;
     font-size: 5em;
   }
 

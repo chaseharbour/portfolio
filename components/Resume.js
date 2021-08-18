@@ -18,7 +18,6 @@ const Resume = () => {
   }, [onScreen]);
   return (
     <section className={classNames}>
-      {/* <h1 className={resumeStyles.title}>Contact</h1> */}
       <article ref={ref} className={resumeStyles.container}>
         <h1 className={resumeStyles.subHead}>Let's get in touch.</h1>
         <p className={resumeStyles.body}>
@@ -34,7 +33,7 @@ const Resume = () => {
           </a>
           . Otherwise, feel free to shoot me a message!
         </p>
-        <form className={resumeStyles.form}>
+        <form mehtod="POST" className={resumeStyles.form}>
           <label for="name">Name</label>
           <input
             className={resumeStyles.formName}
@@ -64,6 +63,9 @@ const Resume = () => {
             name="message"
             placeholder="Message..."
           />
+          <button className={resumeStyles.btn} type="submit">
+            Send
+          </button>
         </form>
       </article>
     </section>

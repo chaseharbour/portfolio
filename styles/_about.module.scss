@@ -15,7 +15,8 @@
   overflow: hidden;
 
   @include tablet-screens {
-    //grid-template-columns: minmax(5rem, 70%);
+    margin: 0 auto;
+    margin-bottom: 3rem;
     max-width: 40rem;
   }
 
@@ -29,42 +30,8 @@
   }
 }
 
-.title {
-  position: relative;
-  padding: 3rem 0 1.625rem 0;
-  margin: 0;
-  background: $bg-primary;
-  color: white;
-  font-size: 3em;
-  font-family: inherit;
-  letter-spacing: -0.06rem;
-  text-transform: uppercase;
-  z-index: 2;
-
-  @include tablet-screens {
-    padding: 4rem 0 1.625rem 0;
-    font-size: 5em;
-  }
-
-  @include desktop-screens {
-    margin: 0 0 0 5%;
-    padding: 10rem 0 10rem 0;
-    font-size: 7em;
-
-    &::after {
-      content: "";
-      position: absolute;
-      background-color: $text-white;
-      width: 75%;
-      height: 9px;
-      top: 50%;
-      left: 22%;
-      z-index: -1;
-    }
-  }
-}
-
 .asideContainer {
+  margin-bottom: 2rem;
   &:nth-of-type(1) {
     h2 {
       &::after {
@@ -114,7 +81,7 @@
     z-index: -1;
 
     @include tablet-screens {
-      height: 0.5em;
+      height: 0.4em;
       width: 100%;
     }
     @include desktop-screens {
@@ -147,6 +114,7 @@
   @include tablet-screens {
     font-size: 1.2em;
     line-height: 1.6em;
+    margin-bottom: 2rem;
   }
 
   @include desktop-screens {
