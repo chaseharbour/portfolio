@@ -8,6 +8,8 @@
   align-content: center;
   max-width: 30rem;
   margin: 0 auto;
+  margin-left: 1.5rem;
+  margin-bottom: 3rem;
   padding: 0;
   background-color: $bg-primary;
   overflow: hidden;
@@ -21,7 +23,9 @@
     grid-template-columns: repeat(3, 28rem);
     grid-gap: 5rem;
     max-width: 80%;
-    justify-content: center;
+    margin: 0 auto;
+    margin-bottom: 10rem;
+    justify-items: center;
   }
 }
 
@@ -63,66 +67,24 @@
 .asideContainer {
   &:nth-of-type(1) {
     h2 {
-      color: $contrast-blue;
       &::after {
-        content: "";
-        position: absolute;
         background-color: $contrast-blue;
-        height: 9px;
-        width: 13.5rem;
-        top: 37px;
-        left: 0.8rem;
-        z-index: -1;
-
-        @include tablet-screens {
-          height: 15px;
-          width: 22.5rem;
-          top: 52px;
-        }
       }
     }
   }
 
   &:nth-of-type(2) {
     h2 {
-      color: $contrast-red;
       &::after {
-        content: "";
-        position: absolute;
         background-color: $contrast-red;
-        height: 9px;
-        width: 13rem;
-        top: 37px;
-        left: 0.8rem;
-        z-index: -1;
-
-        @include tablet-screens {
-          height: 15px;
-          width: 22rem;
-          top: 52px;
-        }
       }
     }
   }
 
   &:nth-of-type(3) {
     h2 {
-      color: $contrast-yellow;
       &::after {
-        content: "";
-        position: absolute;
         background-color: $contrast-yellow;
-        height: 9px;
-        width: 16rem;
-        top: 37px;
-        left: 0.8rem;
-        z-index: -1;
-
-        @include tablet-screens {
-          height: 15px;
-          width: 26.5rem;
-          top: 52px;
-        }
       }
     }
   }
@@ -130,57 +92,61 @@
 
 .aboutHeader {
   position: relative;
-  padding: 1rem;
+  padding: 0;
   margin: 0;
   margin-top: 0.5rem;
+  margin-bottom: 2rem;
   text-align: left;
-  font-family: $header-font;
+  font-family: $subtext-font;
+  color: $text-white;
+  font-size: 1.5rem;
+  max-width: max-content;
   text-transform: uppercase;
   z-index: 2;
 
   &::after {
     content: "";
     position: absolute;
-    height: 9px;
+    height: 0.3em;
     width: 100%;
-    top: 32px;
-    left: -3%;
+    bottom: 0;
+    left: 0;
     z-index: -1;
+
+    @include tablet-screens {
+      height: 0.5em;
+      width: 100%;
+    }
+    @include desktop-screens {
+      height: 0.3em;
+      width: 100%;
+    }
   }
 
   @include tablet-screens {
-    font-size: 2.5em;
+    font-size: 2rem;
+  }
+  @include desktop-screens {
+    font-size: 2.5rem;
   }
 }
 
-.aboutBodyPrimary,
-.aboutBodySecondary,
-.aboutBodyTertiary {
+.aboutBody {
   position: relative;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1rem;
+  max-width: 23ch;
   color: $text-white;
   font-family: $paragraph-font;
-  line-height: 1.4rem;
+  line-height: 1.6rem;
   font-size: 0.94rem;
   font-weight: regular;
   z-index: 1;
 
-  &::after {
-    content: "";
-    position: absolute;
-    top: -1rem;
-    left: -1%;
-    background-color: $bg-secondary;
-    width: calc(100% - 5rem);
-    height: 95%;
-    z-index: -1;
-  }
-
   @include tablet-screens {
     font-size: 1.2em;
     line-height: 1.6em;
-    padding: 1.5rem;
   }
 
   @include desktop-screens {

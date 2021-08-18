@@ -10,3 +10,38 @@
     @content;
   }
 }
+
+//Pseudo element
+@mixin pseudo(
+  $loc: after,
+  $content: "",
+  $top: 0,
+  $bottom: 0,
+  $left: 0,
+  $right: 0
+) {
+  position: relative;
+
+  &::#{$loc} {
+    content: $content;
+    position: absolute;
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+    @content;
+  }
+}
+
+@mixin scale-anim(
+  $axis: X,
+  $scale: 1,
+  $time: 250ms,
+  $origin: center,
+  $type: ease
+) {
+  transform: scale#{$axis }($scale);
+  transform-origin: $origin;
+  transition: transform $time $type;
+  @content;
+}

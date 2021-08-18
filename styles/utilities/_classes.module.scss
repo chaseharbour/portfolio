@@ -1,4 +1,6 @@
 @import "variables.module";
+@import "mixins.module";
+
 //A tag with animated effect
 .animLink {
   position: relative;
@@ -6,23 +8,42 @@
   font-size: inherit;
   text-decoration: none;
   text-transform: uppercase;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 0.12em;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-color: $text-white;
+    transform-origin: left;
+    transition: transform 300ms;
+  }
+
+  &:hover::after,
+  :focus::after {
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 200ms;
+  }
 }
 
-.animLink::after {
-  content: "";
-  position: absolute;
-  height: 0.12em;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  background-color: $text-white;
-  transform-origin: left;
-  transition: transform 300ms;
+.pseudoTopBorder {
+  @include pseudo(before) {
+    height: 0.25em;
+    width: 100%;
+    background-color: #fff;
+    transform: scaleX(0);
+  }
 }
 
-.animLink:hover::after,
-.animLink:focus::after {
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 200ms;
+.animPseudoTopBorder {
+  @include pseudo(before) {
+    height: 0.25em;
+    width: 100%;
+    background-color: #fff;
+    transform: scaleX(0);
+    @include scale-anim($scale: 0.9);
+  }
 }

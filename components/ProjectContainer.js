@@ -3,6 +3,7 @@ import Project from "./Project";
 import projectContainer from "../styles/_projectContainer.module.scss";
 
 import { motion, AnimateSharedLayout } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 const MotionProject = motion(Project, { forwardMotionProps: true });
 
@@ -76,7 +77,7 @@ const ProjectContainer = () => {
       //If there is a project that has been clicked on, this markup will be applied.
       return (
         <>
-          <h1 className={projectContainer.title}>Work</h1>
+          <SectionHeader content="Work" />
           <section
             className={`${projectContainer.active} ${projectContainer.container}`}
           >
@@ -117,7 +118,7 @@ const ProjectContainer = () => {
     } else {
       return (
         <>
-          <h1 className={projectContainer.title}>Work</h1>
+          <SectionHeader content="Work" />
           <section
             className={`${projectContainer.inactive} ${projectContainer.container}`}
           >

@@ -5,16 +5,18 @@
 .container {
   display: grid;
   justify-content: center;
-  padding: 0 0 2rem 2rem;
+  grid-template-rows: minmax(min-content, max-content);
   max-width: 30rem;
   background-color: $bg-primary;
 
   @include tablet-screens {
-    grid-template-columns: minmax(5rem, 70%);
+    // grid-template-columns: minmax(5rem, 70%);
+    max-width: 100%;
+    justify-content: center;
   }
 
   @include desktop-screens {
-    max-width: 50rem;
+    max-width: 50%;
     justify-content: center;
     margin: 0 auto;
   }
@@ -24,6 +26,7 @@
   position: relative;
   padding: 3rem 0 1.625rem 0;
   margin: 0;
+  margin-bottom: 4rem;
   background: $bg-primary;
   color: white;
   font-size: 3em;
@@ -66,13 +69,23 @@
 }
 
 .subHead {
+  margin: 0;
+  margin-top: 4rem;
   color: $contrast-yellow;
-  font-family: $header-font;
+  font-family: $subtext-font;
   font-weight: bold;
-  font-size: 2.5em;
+  font-size: 2em;
   text-transform: uppercase;
   line-height: 0.95;
   max-width: 10ch;
+
+  @include tablet-screens {
+    font-size: 2.5em;
+  }
+  @include desktop-screens {
+    margin-top: 10rem;
+    font-size: 4em;
+  }
 }
 
 .body {
@@ -81,18 +94,18 @@
   font-family: $paragraph-font;
   line-height: 1.6rem;
   font-size: 0.94rem;
-  max-width: 12rem;
+  max-width: 17ch;
   padding: 0 0 1.5rem 0;
 
   @include tablet-screens {
     font-size: 1.2em;
-    line-height: 1.4em;
+    line-height: 1.6em;
+    max-width: 20ch;
   }
 
   @include desktop-screens {
-    max-width: 70%;
+    max-width: 35ch;
     padding: 0 0 2rem 0;
-
     font-size: 1.2em;
     line-height: 2em;
   }
@@ -100,28 +113,44 @@
 
 .form {
   display: grid;
+  position: relative;
   grid-gap: 0.5rem;
   max-width: 10rem;
-}
 
-.form label {
-  display: none;
-}
+  label {
+    display: none;
+  }
 
-.form input {
-  width: 100%;
-  height: 1.5rem;
-  font-family: $paragraph-font;
-  border: 2px solid black;
-  padding: 0.2em 0.6em;
-  box-shadow: -3px 3px 0px 0px $contrast-yellow;
-}
-.form textarea {
-  width: 100%;
-  height: 4.5rem;
-  font-family: $paragraph-font;
-  resize: none;
-  border: 2px solid black;
-  padding: 0.2em 0.6em;
-  box-shadow: -3px 3px 0px 0px $contrast-yellow;
+  input {
+    width: 100%;
+    height: 1.5rem;
+    font-family: $paragraph-font;
+    background-color: $text-white;
+
+    border: 2px solid black;
+    padding: 0.2em 0.6em;
+    box-shadow: -3px 3px 0px 0px $contrast-yellow;
+  }
+
+  textarea {
+    width: 100%;
+    height: 4.5rem;
+    font-family: $paragraph-font;
+    resize: none;
+    background-color: $text-white;
+    border: 2px solid black;
+    padding: 0.2em 0.6em;
+    box-shadow: -3px 3px 0px 0px $contrast-yellow;
+
+    @include desktop-screens {
+      height: 6rem;
+    }
+  }
+
+  @include tablet-screens {
+    max-width: 100%;
+  }
+  @include desktop-screens {
+    max-width: 35rem;
+  }
 }
