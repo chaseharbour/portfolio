@@ -7,7 +7,7 @@
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;
-  text-align: left;
+  text-align: center;
   cursor: pointer;
 
   &::after {
@@ -19,6 +19,7 @@
     left: -3%;
     background: #ff4960;
     z-index: -1;
+    transition: transform 0.2s;
 
     @include tablet-screens {
       top: 24px;
@@ -28,6 +29,11 @@
       height: 11px;
       top: 30px;
     }
+  }
+
+  &:hover:after {
+    transform: translateY(3px);
+    transition: transform 0.2s;
   }
 
   @include tablet-screens {

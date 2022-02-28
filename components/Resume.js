@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import resumeStyles from "../styles/_resume.module.scss";
 import useOnScreen from "../hooks/useOnScreen";
+import Form from "./Form";
 
 const Resume = () => {
   const ref = useRef();
@@ -33,40 +34,7 @@ const Resume = () => {
           </a>
           . Otherwise, feel free to shoot me a message!
         </p>
-        <form mehtod="POST" className={resumeStyles.form}>
-          <label for="name">Name</label>
-          <input
-            className={resumeStyles.formName}
-            type="text"
-            name="name"
-            placeholder="Name *"
-            required
-          />
-          <label for="email">Email</label>
-          <input
-            className={resumeStyles.formEmail}
-            type="email"
-            name="email"
-            placeholder="Email *"
-            required
-          />
-          <label for="subject">Subject</label>
-          <input
-            className={resumeStyles.formSubject}
-            type="text"
-            name="subject"
-            placeholder="Subject"
-          />
-          <label for="message">Message</label>
-          <textarea
-            className={resumeStyles.formMessage}
-            name="message"
-            placeholder="Message..."
-          />
-          <button className={resumeStyles.btn} type="submit">
-            Send
-          </button>
-        </form>
+        <Form />
       </article>
     </section>
   );
