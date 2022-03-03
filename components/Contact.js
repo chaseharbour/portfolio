@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import resumeStyles from "../styles/_resume.module.scss";
+import resumeStyles from "../styles/_contact.module.scss";
 import useOnScreen from "../hooks/useOnScreen";
-import Form from "./Form";
+import ContactForm from "./ContactForm";
 
 const Resume = () => {
   const ref = useRef();
@@ -34,7 +34,7 @@ const Resume = () => {
           </a>
           . Otherwise, feel free to shoot me a message!
         </p>
-        <Form />
+        <ContactForm />
       </article>
     </section>
   );

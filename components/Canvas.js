@@ -12,18 +12,21 @@ const Canvas = (props) => {
 
   let randX;
   let randY;
+  let randColor;
+
+  let min;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
-    const min = Math.min(context.canvas.height, context.canvas.width);
+    min = Math.min(context.canvas.height, context.canvas.width);
 
     let animationFrameId;
     let frameCount = 0;
 
     for (let i = 0; i < 60; i++) {
-      let randColor = Math.floor(Math.random() * colors.length);
+      randColor = Math.floor(Math.random() * colors.length);
       randX = Math.random() * context.canvas.width;
       randY = Math.random() * context.canvas.height;
       boids.push(new Boid(randX, randY, min * 0.018, 2, colors[randColor]));
@@ -56,6 +59,13 @@ const Canvas = (props) => {
     canvasRef.current.height = canvasRef.current.clientHeight;
   };
 
+  const handleCanvasClick = (e) => {
+    randColor = Math.floor(Math.random() * colors.length);
+    boids.push(
+      new Boid(e.clientX, e.clientY, min * 0.018, 2, colors[randColor])
+    );
+  };
+
   useEffect(() => {
     resizeCanvas();
 
@@ -65,7 +75,14 @@ const Canvas = (props) => {
     };
   });
 
-  return <canvas className={canvasStyles.canvas} ref={canvasRef} {...props} />;
+  return (
+    <canvas
+      onClick={handleCanvasClick}
+      className={canvasStyles.canvas}
+      ref={canvasRef}
+      {...props}
+    />
+  );
 };
 
 export default Canvas;

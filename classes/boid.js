@@ -14,6 +14,7 @@ this.maxSpeed = 2;
 this.perception = 20;
 */
 
+//On large screens boids still tend to travel toward 0,0
 export default class Boid {
   constructor(x, y, r, speed, color = "#fff") {
     this.position = new Vector(x, y);
@@ -25,7 +26,7 @@ export default class Boid {
     this.velocity = new Vector().random2D(2, 10);
     this.acceleration = new Vector();
     this.alignmentFactor = 0.007;
-    this.cohesionFactor = 0.00008;
+    this.cohesionFactor = 0.00004; //0.00004 is the sweet spot in terms of behavior and coverage of canvas
     this.separationFactor = 0.04;
     this.maxSpeed = 2;
     this.perception = 20;
@@ -79,7 +80,7 @@ export default class Boid {
   }
 
   cohesion(boids) {
-    const cohesionRange = 5;
+    const cohesionRange = 0.2;
     let cohesion = new Vector();
     let boidsInRange = 0;
 

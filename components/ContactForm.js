@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import resumeStyles from "../styles/_resume.module.scss";
+import SubmitButton from "./SubmitButton";
+import resumeStyles from "../styles/_contact.module.scss";
 
 const Form = () => {
   const [success, setSuccess] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const encode = (data) => {
     return Object.keys(data)
@@ -13,6 +15,7 @@ const Form = () => {
   };
   const handleSubmitForm = (e) => {
     e.preventDefault();
+    setSubmitted(true);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -21,9 +24,16 @@ const Form = () => {
         ...name,
       }),
     })
-      .then(() => setSuccess(true))
-      .catch((error) => alert(error));
+      .then((res) => {
+        console.log(res);
+        setSuccess(true);
+      })
+      .catch((error) => {
+        setSuccess(false);
+        alert(error);
+      });
   };
+
   return (
     <form
       name="contact"
@@ -61,9 +71,7 @@ const Form = () => {
         name="message"
         placeholder="Message..."
       />
-      <button className={resumeStyles.btn} type="submit">
-        Send
-      </button>
+      <SubmitButton success={success} submitted={submitted} />
     </form>
   );
 };

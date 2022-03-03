@@ -1,15 +1,12 @@
 import Header from "./Header";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import CardContainer from "./CardContainer";
 import About from "./About";
 import ContactLinks from "./ContactLinks";
-import Resume from "./Resume";
+import Contact from "./Contact";
 import ProjectContainer from "./ProjectContainer";
 
 const PhysicsCanvas = dynamic(() => import("./PhysicsCanvas"), { ssr: false });
-
-import canvasStyles from "../styles/_canvas.module.scss";
 
 const Layout = (props) => (
   <>
@@ -20,7 +17,7 @@ const Layout = (props) => (
     <div>{props.children}</div>
     <ProjectContainer />
     <About></About>
-    <Resume />
+    <Contact />
     <ContactLinks />
     {/* <PhysicsCanvas
       background="#383F51"
