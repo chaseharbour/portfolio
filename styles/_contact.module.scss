@@ -6,7 +6,8 @@
   display: grid;
   justify-content: center;
   grid-template-rows: minmax(min-content, max-content);
-  max-width: 30rem;
+  max-width: 100%;
+  margin: 0;
   background-color: $bg-primary;
 
   @include tablet-screens {
@@ -49,7 +50,7 @@
       content: "";
       position: absolute;
       background-color: $text-white;
-      width: 70rem;
+      max-width: 2rem;
       height: 9px;
       top: 50%;
       left: 30%;

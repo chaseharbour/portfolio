@@ -41,7 +41,7 @@
 .animPseudoTopBorder {
   @include pseudo(before) {
     height: 0.25em;
-    width: 100%;
+    max-width: 100%;
     background-color: #fff;
     transform: scaleX(0);
     @include scale-anim($scale: 0.9);

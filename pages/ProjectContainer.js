@@ -1,36 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Project from "./Project";
 import projectContainer from "../styles/_projectContainer.module.scss";
-
+import axios from "axios";
 import { motion, AnimateSharedLayout } from "framer-motion";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../components/SectionHeader";
 
 const MotionProject = motion(Project, { forwardMotionProps: true });
 
-const ProjectContainer = () => {
-  const [data, setData] = useState([
-    {
-      id: 0,
-      active: false,
-      title: "Saveddit",
-      description:
-        "Web application to view any static image that a user has saved to their Reddit account.",
-    },
-    {
-      id: 1,
-      active: false,
-      title: "Trivia app",
-      description:
-        "Room-based trivia and chat app. Compete and chat with friends in this multiplayer trivia game.",
-    },
-    {
-      id: 2,
-      active: false,
-      title: "Portfolio",
-      description:
-        "Website to display brief information about who I am as a developer and a person.",
-    },
-  ]);
+const ProjectContainer = ({ repos }) => {
+  const [data, setData] = useState([]);
 
   const [isActive, setIsActive] = useState(false);
 
@@ -39,6 +17,20 @@ const ProjectContainer = () => {
     shown: { x: 0 },
     hidden: { x: "-100%" },
   };
+
+  useEffect(() => {
+    setData(
+      repos.map((r, i) => {
+        return {
+          id: i,
+          title: r.name,
+          description: r.description,
+          url: r.html_url,
+          active: false,
+        };
+      })
+    );
+  }, []);
 
   useEffect(() => {
     const projectsCopy = [...data];

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import resumeStyles from "../styles/_contact.module.scss";
 import useOnScreen from "../hooks/useOnScreen";
-import ContactForm from "./ContactForm";
+import ContactForm from "../components/ContactForm";
 
 const Resume = () => {
   const ref = useRef();

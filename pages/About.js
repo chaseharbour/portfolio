@@ -1,5 +1,5 @@
 import React from "react";
-import SectionHeader from "./SectionHeader";
+import SectionHeader from "../components/SectionHeader";
 import aboutStyles from "../styles/_about.module.scss";
 
 const About = () => {
@@ -14,8 +14,8 @@ const About = () => {
             team where I can expand my skillset and hone my craft.
           </p>
           <p className={aboutStyles.aboutBody}>
-            My passion is to help individuals and companies create and interact
-            with meaningful web experiences.
+            My passion is to help individuals and organizations create and
+            interact with meaningful web experiences.
           </p>
         </aside>
         <aside className={aboutStyles.asideContainer}>

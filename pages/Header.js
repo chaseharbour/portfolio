@@ -1,18 +1,21 @@
 import React from "react";
-import Canvas from "./Canvas";
+import Canvas from "../components/Canvas";
 import headerStyles from "../styles/_header.module.scss";
+import dynamic from "next/dynamic";
+
+const DynamicCanvas = dynamic(() => import("../components/Canvas"));
 
 const Header = () => (
-  <section className={headerStyles.container}>
+  <header className={headerStyles.container}>
     <h1 className={headerStyles.firstname}>Chase</h1>
     <div className={headerStyles.imgContainer}>
       <div className={headerStyles.canvasContainer}>
-        <Canvas />
+        <DynamicCanvas />
       </div>
       <div className={headerStyles.imgRight}></div>
     </div>
     <h1 className={headerStyles.lastname}>Harbour</h1>
-  </section>
+  </header>
 );
 
 export default Header;
