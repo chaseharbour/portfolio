@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Project from "./Project";
 import projectContainer from "../styles/_projectContainer.module.scss";
-import axios from "axios";
-import { motion, AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
+import Project from "../components/Project";
+import ProjectImages from "../components/ProjectImages";
 
 const MotionProject = motion(Project, { forwardMotionProps: true });
 
@@ -64,71 +64,97 @@ const ProjectContainer = ({ repos }) => {
   };
 
   /* When a Project component is clicked on, it becomes active. It will be placed in a separate grid comlumn to the left, the headers for the other projects will be positioned to the right and will become a single column. */
-  {
-    if (isActive) {
-      //If there is a project that has been clicked on, this markup will be applied.
-      return (
-        <>
-          <SectionHeader content="Work" />
-          <section
-            className={`${projectContainer.active} ${projectContainer.container}`}
-          >
-            {data.map((proj) => {
-              if (proj.active) {
-                return (
-                  <MotionProject
-                    animate={{ x: 10, scale: 1 }}
-                    isActive={proj.active}
-                    onClick={handleProjectClicked}
-                    theData={proj}
-                    key={proj.id}
-                  />
-                );
-              }
-            })}
+  // {
+  //   if (isActive) {
+  //     //If there is a project that has been clicked on, this markup will be applied.
+  //     return (
+  //       <>
+  //         <SectionHeader content="Work" />
+  //         <section
+  //           className={`${projectContainer.active} ${projectContainer.container}`}
+  //         >
+  //           {data.map((proj) => {
+  //             if (proj.active) {
+  //               return (
+  //                 <MotionProject
+  //                   animate={{ x: 10, scale: 1 }}
+  //                   isActive={proj.active}
+  //                   onClick={handleProjectClicked}
+  //                   theData={proj}
+  //                   key={proj.id}
+  //                 />
+  //               );
+  //             }
+  //           })}
 
-            <aside
-              className={`${projectContainer.aside} ${projectContainer.container}`}
-            >
-              {data.map((proj, i) => {
-                if (!proj.active) {
-                  return (
-                    <MotionProject
-                      isActive={proj.active}
-                      onClick={handleProjectClicked}
-                      theData={proj}
-                      key={proj.id}
-                    />
-                  );
-                }
-              })}
-            </aside>
-            <div className={projectContainer.imgContainer}></div>
-          </section>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <SectionHeader content="Work" />
-          <section
-            className={`${projectContainer.inactive} ${projectContainer.container}`}
+  //           <aside
+  //             className={`${projectContainer.aside} ${projectContainer.container}`}
+  //           >
+  //             {data.map((proj, i) => {
+  //               if (!proj.active) {
+  //                 return (
+  //                   <MotionProject
+  //                     isActive={proj.active}
+  //                     onClick={handleProjectClicked}
+  //                     theData={proj}
+  //                     key={proj.id}
+  //                   />
+  //                 );
+  //               }
+  //             })}
+  //           </aside>
+  //           <div className={projectContainer.imgContainer}>
+  //             <ProjectImages />
+  //           </div>
+  //         </section>
+  //       </>
+  //     );
+  //   } else {
+  //     return (
+  //       <>
+  //         <SectionHeader content="Work" />
+  //         <section
+  //           className={`${projectContainer.inactive} ${projectContainer.container}`}
+  //         >
+  //           {data.map((proj, i) => (
+  //             <MotionProject
+  //               animate={{ scale: 0.95 }}
+  //               isActive={proj.active}
+  //               onClick={handleProjectClicked}
+  //               theData={proj}
+  //               key={proj.id}
+  //             />
+  //           ))}
+  //           <div className={projectContainer.imgContainer}>
+  //             <ProjectImages />
+  //           </div>
+  //         </section>
+  //       </>
+  //     );
+  //   }
+  // }
+
+  return (
+    <>
+      <SectionHeader content="Work" />
+
+      <div className={projectContainer.container}>
+        {data.map((proj) => (
+          <motion.div
+            className={projectContainer.item}
+            data-isActive={proj.active}
+            data-anyActive={isActive && !proj.active}
           >
-            {data.map((proj, i) => (
-              <MotionProject
-                animate={{ scale: 0.95 }}
-                isActive={proj.active}
-                onClick={handleProjectClicked}
-                theData={proj}
-                key={proj.id}
-              />
-            ))}
-            <div className={projectContainer.imgContainer}></div>
-          </section>
-        </>
-      );
-    }
-  }
+            <Project
+              handler={handleProjectClicked}
+              active={proj.active}
+              data={proj}
+            />
+          </motion.div>
+        ))}
+      </div>
+    </>
+  );
 };
 
 export default ProjectContainer;

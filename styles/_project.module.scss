@@ -63,22 +63,23 @@
       }
     }
   }
-  p {
-    color: #fff;
-    line-height: 1.5rem;
-    font-size: 1em;
-    font-weight: regular;
-    display: inherit;
+}
 
-    @include tablet-screens {
-      line-height: 2.3rem;
-      font-size: 1.4em;
-    }
+.desc {
+  color: #fff;
+  line-height: 1.5rem;
+  font-size: 1em;
+  font-weight: regular;
+  display: inherit;
 
-    @include desktop-screens {
-      line-height: 2.7rem;
-      font-size: 1.7em;
-      padding: 0 6rem 0 6rem;
-    }
+  @include tablet-screens {
+    line-height: 2.3rem;
+    font-size: 1.4em;
+  }
+
+  @include desktop-screens {
+    line-height: 2.7rem;
+    font-size: 1.7em;
+    padding: 0 6rem 0 6rem;
   }
 }
