@@ -1,14 +1,16 @@
-import ProjectContainer from "./ProjectContainer";
+import Work from "./Work";
 import About from "./About";
 import Contact from "./Contact";
 import ContactLinks from "./ContactLinks";
+import { LayoutGroup } from "framer-motion";
 import axios from "axios";
 
 export default function Home({ repos }) {
   return (
     <>
-      <ProjectContainer repos={repos} />
-      <About></About>
+      <Work repos={repos} />
+      <About />
+
       <Contact />
       <ContactLinks />
     </>

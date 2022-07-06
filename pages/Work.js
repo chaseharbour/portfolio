@@ -3,20 +3,11 @@ import projectContainer from "../styles/_projectContainer.module.scss";
 import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
 import Project from "../components/Project";
-import ProjectImages from "../components/ProjectImages";
 
-const MotionProject = motion(Project, { forwardMotionProps: true });
-
-const ProjectContainer = ({ repos }) => {
+const Work = ({ repos }) => {
   const [data, setData] = useState([]);
 
   const [isActive, setIsActive] = useState(false);
-
-  //Framer motion animation states
-  const variants = {
-    shown: { x: 0 },
-    hidden: { x: "-100%" },
-  };
 
   useEffect(() => {
     setData(
@@ -135,12 +126,12 @@ const ProjectContainer = ({ repos }) => {
   // }
 
   return (
-    <>
+    <section className={projectContainer.work}>
       <SectionHeader content="Work" />
 
-      <div className={projectContainer.container}>
+      <aside className={projectContainer.container}>
         {data.map((proj) => (
-          <motion.div
+          <motion.article
             className={projectContainer.item}
             data-isActive={proj.active}
             data-anyActive={isActive && !proj.active}
@@ -150,11 +141,11 @@ const ProjectContainer = ({ repos }) => {
               active={proj.active}
               data={proj}
             />
-          </motion.div>
+          </motion.article>
         ))}
-      </div>
-    </>
+      </aside>
+    </section>
   );
 };
 
-export default ProjectContainer;
+export default Work;

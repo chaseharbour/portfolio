@@ -1,0 +1,14 @@
+@import "utilities/variables.module";
+@import "utilities/mixins.module";
+
+.emoji {
+  font-size: 2em;
+
+  @include tablet-screens {
+    font-size: 3em;
+  }
+
+  @include desktop-screens {
+    font-size: 4em;
+  }
+}

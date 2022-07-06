@@ -5,6 +5,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(minmax(auto-fill, 1fr));
+  grid-gap: 1rem;
+  margin: 1rem;
+  padding: 1rem;
   justify-items: center;
   background: $bg-primary;
   position: relative;
@@ -121,7 +124,7 @@
 }
 
 .item[data-isActive="true"] {
-  grid-area: 1 /1 / end / 1;
+  grid-area: 1 / 1 / span 3 / 1;
 }
 
 .item[data-anyActive="true"] {

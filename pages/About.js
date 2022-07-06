@@ -1,10 +1,12 @@
 import React from "react";
+import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
+import IconGrid from "../components/IconGrid";
 import aboutStyles from "../styles/_about.module.scss";
 
 const About = () => {
   return (
-    <>
+    <section>
       <SectionHeader content="About" />
       <article className={aboutStyles.container}>
         <aside className={aboutStyles.asideContainer}>
@@ -18,6 +20,10 @@ const About = () => {
             interact with meaningful web experiences.
           </p>
         </aside>
+        <IconGrid
+          className={aboutStyles.iconGrid}
+          icons={["🧑", "💻", "🌐", "👍"]}
+        />
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Where I've Been.</h2>
           <p className={aboutStyles.aboutBody}>
@@ -30,6 +36,7 @@ const About = () => {
             quality experiences to as many others as possible.
           </p>
         </aside>
+        <IconGrid icons={["🧑‍🎓", "📖", "💡", "🧑‍💻"]} />
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Beyond the Screen.</h2>
           <p className={aboutStyles.aboutBody}>
@@ -39,8 +46,9 @@ const About = () => {
             new things.
           </p>
         </aside>
+        <IconGrid icons={["🧑‍🍳", "🪡", "🏕️", "🧑‍🌾"]} />
       </article>
-    </>
+    </section>
   );
 };
 

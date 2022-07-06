@@ -1,0 +1,12 @@
+@import "utilities/variables.module";
+@import "utilities/mixins.module";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, min-content);
+  grid-gap: 1.5rem;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
