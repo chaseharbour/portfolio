@@ -17,8 +17,8 @@ const ContactLinks = () => {
     <article className={contactLinksStyles.container}>
       <h2 className={contactLinksStyles.header}>Find Me At.</h2>
       <ul className={contactLinksStyles.list}>
-        {personalLinks.map((item) => (
-          <li className={contactLinksStyles.listItems}>
+        {personalLinks.map((item, i) => (
+          <li key={i} className={contactLinksStyles.listItems}>
             <a href={item.link} target="_blank" rel="noopener noreferrer">
               <img
                 className={techIcons.tech}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef } from "react";
+import LinkButton from "./LinkButton";
 import projectStyles from "../styles/_project.module.scss";
 
 import { motion } from "framer-motion";
@@ -44,6 +45,13 @@ const Project = forwardRef(({ data, handler, active }, ref) => {
     >
       <h1 className={projectStyles.title}>{handleTitleLength(data.active)}</h1>
       {active ? <p className={projectStyles.desc}>{data.description}</p> : null}
+      {active ? (
+        <LinkButton
+          label={`Link to github repo for project: ${data.title}`}
+          dest={data.url}
+          content="GitHub Repo"
+        />
+      ) : null}
     </motion.article>
   );
 });

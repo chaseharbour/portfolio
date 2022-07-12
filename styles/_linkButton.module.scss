@@ -1,0 +1,43 @@
+@import "utilities/variables.module";
+@import "utilities/mixins.module";
+
+.link {
+    position: relative;
+    color: $text-link;
+    font-weight: 900;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-top: 3rem;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    @include tablet-screens {
+        font-size: 1.15em;
+      }
+    
+      @include desktop-screens {
+        font-size: 1.7em;
+      }
+
+    &::after {
+        content: "";
+        position: absolute;
+        height: 0.12em;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        background-color: $contrast-yellow;
+        transform-origin: left;
+        transition: transform 300ms;
+    }
+
+    &:hover {
+        &::after {
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 200ms;
+        }
+    }
+  }
+
+  
