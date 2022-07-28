@@ -2,15 +2,6 @@
 
 
 [build]
-  command = "npm run build"
-  publish = ".next"
+  command = "next build"
+  publish = "out"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-[[plugins]]
-  package = "netlify-plugin-cypress"
-  [plugins.inputs.postBuild]
-    enable = true
-
-  [plugins.inputs]
-    enable = false
