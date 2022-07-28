@@ -15,8 +15,7 @@
   overflow: hidden;
 
   @include tablet-screens {
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: left;
+    justify-content: center;
     margin: 0 auto;
     margin-bottom: 3rem;
     max-width: 40rem;
@@ -50,26 +49,22 @@
     }
   }
 
-  &:nth-of-type(3) {
+  &:nth-of-type(2) {
     h2 {
       &::after {
         background-color: $contrast-red;
       }
     }
-    @include desktop-screens {
-      grid-area: 1 / 2 / 2 / 3;
-    }
+    
   }
 
-  &:nth-of-type(5) {
+  &:nth-of-type(3) {
     h2 {
       &::after {
         background-color: $contrast-yellow;
       }
     }
-    @include desktop-screens {
-      grid-area: 1 / 3 / 2 / 4;
-    }
+    
   }
 }
 

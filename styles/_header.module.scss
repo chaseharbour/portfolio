@@ -35,25 +35,13 @@
 
 .imgContainer {
   display: grid;
-  grid-template-rows: 80% 20%;
 
   @include tablet-screens {
-    grid-template-rows: auto min-content;
-
-    .canvasContainer {
-      height: 0;
-    }
-
     canvas {
       position: absolute;
       top: 0;
       left: 0;
-    }
-
-    .imgRight {
-      height: 250px;
-      width: 250px;
-      align-self: end;
+      z-index: 1;
     }
   }
 }
@@ -61,24 +49,36 @@
 .canvasContainer {
   width: auto;
   height: auto;
+
+  @include tablet-screens {
+    height: 0;
+  }
 }
 
-// .imgLeft {
-//   height: 100%;
-//   width: 150px;
-//   background-color: $img-bg;
-// }
 .imgRight {
-  height: 100%;
-  width: 150px;
+  position: relative;
+  height: 125px;
+  width: 100px;
   background-color: $img-bg;
   justify-self: left;
+  // border-radius: 50%;
+
+  @include tablet-screens {
+    height: 200px;
+    width: 150px;
+    // margin-left: 2rem;
+  }
 
   @include desktop-screens {
     margin: 0 0 0 15rem;
-    height: 100%;
-    width: 100px;
+    height: 250px;
+    width: 200px;
   }
+}
+
+.img {
+  filter: grayscale(100%);
+  // border-radius: 50%;
 }
 
 .lastname {

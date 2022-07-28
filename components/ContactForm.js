@@ -38,6 +38,7 @@ const Form = () => {
     <form
       name="contact"
       method="POST"
+      data-netlify="true"
       className={resumeStyles.form}
       onSubmit={handleSubmitForm}
     >

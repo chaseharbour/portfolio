@@ -1,5 +1,5 @@
 import React from "react";
-import Canvas from "../components/Canvas";
+import Image from "next/image";
 import headerStyles from "../styles/_header.module.scss";
 import dynamic from "next/dynamic";
 
@@ -12,7 +12,16 @@ const Header = () => (
       <div className={headerStyles.canvasContainer}>
         <DynamicCanvas />
       </div>
-      <div className={headerStyles.imgRight}></div>
+      <div className={headerStyles.imgRight}>
+        <Image
+          className={headerStyles.img}
+          src="/../public/headshot.jpg"
+          layout="fill"
+          objectFit="cover"
+        ></Image>
+      </div>
+
+      {/* <div className={headerStyles.imgRight}></div> */}
     </div>
     <h1 className={headerStyles.lastname}>Harbour</h1>
   </header>

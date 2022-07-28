@@ -20,10 +20,10 @@ const About = () => {
             interact with meaningful web experiences.
           </p>
         </aside>
-        <IconGrid
+        {/* <IconGrid
           className={aboutStyles.iconGrid}
           icons={["🧑", "💻", "🌐", "👍"]}
-        />
+        /> */}
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Where I've Been.</h2>
           <p className={aboutStyles.aboutBody}>
@@ -36,7 +36,7 @@ const About = () => {
             quality experiences to as many others as possible.
           </p>
         </aside>
-        <IconGrid icons={["🧑‍🎓", "📖", "💡", "🧑‍💻"]} />
+        {/* <IconGrid icons={["🧑‍🎓", "📖", "💡", "🧑‍💻"]} /> */}
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Beyond the Screen.</h2>
           <p className={aboutStyles.aboutBody}>
@@ -46,7 +46,7 @@ const About = () => {
             new things.
           </p>
         </aside>
-        <IconGrid icons={["🧑‍🍳", "🪡", "🏕️", "🧑‍🌾"]} />
+        {/* <IconGrid icons={["🧑‍🍳", "🪡", "🏕️", "🧑‍🌾"]} /> */}
       </article>
     </section>
   );
