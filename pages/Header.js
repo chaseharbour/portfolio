@@ -15,7 +15,7 @@ const Header = () => (
       <div className={headerStyles.imgRight}>
         <Image
           className={headerStyles.img}
-          src="/../public/headshot.jpg"
+          src="/headshot.jpg"
           layout="fill"
           objectFit="cover"
         ></Image>
