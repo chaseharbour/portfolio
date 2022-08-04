@@ -24,15 +24,21 @@ const Form = () => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
+
+    console.log(e.target);
+    const contactForm = e.target;
+    const formData = new FormData(contactForm);
+
     setSubmitted(true);
     setLoading(true);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": e.target.getAttribute("name"),
-        ...name,
-      }),
+      body: new URLSearchParams(formData).toString(),
+      // body: encode({
+      //   "form-name": e.target.getAttribute("name"),
+      //   ...name,
+      // }),
     })
       .then((res) => {
         console.log(res);
