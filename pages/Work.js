@@ -132,6 +132,7 @@ const Work = ({ repos }) => {
       <aside className={projectContainer.container}>
         {data.map((proj) => (
           <motion.article
+            key={proj.id}
             className={projectContainer.item}
             data-isActive={proj.active}
             data-anyActive={isActive && !proj.active}

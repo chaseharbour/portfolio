@@ -1,9 +1,7 @@
 import React from "react";
 import resumeStyles from "../styles/_contact.module.scss";
-import successIcon from "../public/icons/success.svg";
-import errorIcon from "../public/icons/error.svg";
 
-const SubmitButton = ({ submitted, success }) => {
+const SubmitButton = ({ submitted, loading, success }) => {
   return (
     <button
       className={
@@ -17,10 +15,12 @@ const SubmitButton = ({ submitted, success }) => {
       disabled={success}
     >
       {submitted ? (
-        success ? (
-          <img src={successIcon} alt="Success checkmark icon"></img>
+        loading ? (
+          "Loading"
+        ) : success ? (
+          <img src="/icons/success.svg" alt="Success checkmark icon"></img>
         ) : (
-          <img src={errorIcon} alt="Error exclamation icon"></img>
+          <img src="/icons/error.svg" alt="Error exclamation icon"></img>
         )
       ) : (
         "Send"

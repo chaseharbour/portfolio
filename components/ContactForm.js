@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SubmitButton from "./SubmitButton";
 import resumeStyles from "../styles/_contact.module.scss";
 
 const Form = () => {
   const [success, setSuccess] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // useEffect(() => {
+  //   if (window.location.search.includes("success=true")) {
+  //     setSuccess(true);
+  //     setSubmitted(true);
+  //   }
+  // }, []);
 
   const encode = (data) => {
     return Object.keys(data)
@@ -13,9 +21,11 @@ const Form = () => {
       )
       .join("&");
   };
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
     setSubmitted(true);
+    setLoading(true);
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -26,9 +36,11 @@ const Form = () => {
     })
       .then((res) => {
         console.log(res);
+        setLoading(false);
         setSuccess(true);
       })
       .catch((error) => {
+        setLoading(false);
         setSuccess(false);
         alert(error);
       });
@@ -40,6 +52,7 @@ const Form = () => {
       method="POST"
       data-netlify="true"
       className={resumeStyles.form}
+      // action="/?success=true"
       onSubmit={handleSubmitForm}
     >
       <input type="hidden" name="form-name" value="contact" />
@@ -48,7 +61,8 @@ const Form = () => {
         className={resumeStyles.formName}
         type="text"
         name="name"
-        placeholder="Name *"
+        placeholder="Name (required)"
+        autoComplete="Name"
         required
       />
       <label htmlFor="email">Email</label>
@@ -56,7 +70,8 @@ const Form = () => {
         className={resumeStyles.formEmail}
         type="email"
         name="email"
-        placeholder="Email *"
+        placeholder="Email (required)"
+        autoComplete="email"
         required
       />
       <label htmlFor="subject">Subject</label>

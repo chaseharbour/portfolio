@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
 import IconGrid from "../components/IconGrid";
@@ -9,6 +10,14 @@ const About = () => {
     <section>
       <SectionHeader content="About" />
       <article className={aboutStyles.container}>
+        <div className={aboutStyles.imgContainer}>
+          <Image
+            className={aboutStyles.img}
+            src="/headshot.jpg"
+            layout="fill"
+            objectFit="cover"
+          ></Image>
+        </div>
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Where I'm Going.</h2>
           <p className={aboutStyles.aboutBody}>
@@ -27,9 +36,9 @@ const About = () => {
         <aside className={aboutStyles.asideContainer}>
           <h2 className={aboutStyles.aboutHeader}>Where I've Been.</h2>
           <p className={aboutStyles.aboutBody}>
-            My interest in web development stems from my time as a teacher where
-            web technologies brought content to a diverse group of individuals
-            in meaningful and accessible ways.
+            My interest in web development stems from my time as a teacher,
+            where web technologies brought content to a diverse group of
+            individuals in meaningful and accessible ways.
           </p>
           <p className={aboutStyles.aboutBody}>
             A passion was sparked and I sought to build my skills to bring those

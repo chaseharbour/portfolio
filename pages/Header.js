@@ -12,14 +12,14 @@ const Header = () => (
       <div className={headerStyles.canvasContainer}>
         <DynamicCanvas />
       </div>
-      <div className={headerStyles.imgRight}>
+      {/* <div className={headerStyles.imgRight}>
         <Image
           className={headerStyles.img}
           src="/headshot.jpg"
           layout="fill"
           objectFit="cover"
         ></Image>
-      </div>
+      </div> */}
 
       {/* <div className={headerStyles.imgRight}></div> */}
     </div>
