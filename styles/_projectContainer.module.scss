@@ -134,3 +134,13 @@
 .item {
   grid-column-start: auto;
 }
+
+.item {
+  article {
+    a {
+      @include tablet-screens {
+        margin-left: 25%;
+      }
+    }
+  }
+}

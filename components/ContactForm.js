@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SubmitButton from "./SubmitButton";
 import resumeStyles from "../styles/_contact.module.scss";
 
@@ -7,25 +7,9 @@ const Form = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   if (window.location.search.includes("success=true")) {
-  //     setSuccess(true);
-  //     setSubmitted(true);
-  //   }
-  // }, []);
-
-  const encode = (data) => {
-    return Object.keys(data)
-      .map(
-        (key) => `${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`
-      )
-      .join("&");
-  };
-
   const handleSubmitForm = (e) => {
     e.preventDefault();
 
-    console.log(e.target);
     const contactForm = e.target;
     const formData = new FormData(contactForm);
 
@@ -35,13 +19,8 @@ const Form = () => {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
-      // body: encode({
-      //   "form-name": e.target.getAttribute("name"),
-      //   ...name,
-      // }),
     })
       .then((res) => {
-        console.log(res);
         setLoading(false);
         setSuccess(true);
       })

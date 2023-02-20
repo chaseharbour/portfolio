@@ -26,7 +26,6 @@
   }
 
   @include desktop-screens {
-    grid-template-columns: repeat(3, 28rem);
     grid-column-gap: 5rem;
     max-width: 80%;
     margin: 0 auto;
